@@ -1,0 +1,98 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[markdown]": {
+		"editor.wordWrap": "on",
+		"editor.renderWhitespace": "all",
+		"editor.acceptSuggestionOnEnter": "off"
+	},
+	"better-comments.tags": [
+		// normal comment
+		{
+			//! alert
+			"tag": "!",
+			"color": "#BF616A",
+			"strikethrough": false,
+			"underline": true,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			//? question
+			"tag": "?",
+			"color": "#88C0D0",
+			"strikethrough": false,
+			"underline": true,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			//// commented out
+			"tag": "//",
+			"color": "#4C566A",
+			"strikethrough": true,
+			"underline": true,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			//todo todo
+			"tag": "todo",
+			"color": "#D08770",
+			"strikethrough": false,
+			"underline": true,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			//* important comment
+			"tag": "*",
+			"color": "#EBCB8B",
+			"strikethrough": false,
+			"underline": true,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		},
+		{
+			//$ info comment
+			"tag": "$",
+			"color": "#B48EAD",
+			"strikethrough": false,
+			"underline": true,
+			"backgroundColor": "transparent",
+			"bold": false,
+			"italic": false
+		}
+	],
+	"bracket-pair-colorizer-2.colors": [
+		"#dfbaff",
+		"#bae1ff",
+		"#baffc9",
+		"#ffffba",
+		"#ffd3a1",
+		"#ffb3ba"
+	],
+	"workbench.colorTheme": "Nord",
+	"workbench.iconTheme": "vscode-icons",
+	"breadcrumbs.enabled": true,
+	"editor.fontLigatures": false,
+	"editor.fontFamily": "Hasklig, Dank Mono, Roboto Mono, Fira Code, Source Code Pro, Consolas, Monospace",
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/coverage": true,
+		"**/dist": true,
+		"**/build": true,
+		"**/.build": true,
+		"**/.gh-pages": true
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"aaron-bond.better-comments",
+		"formulahendry.auto-rename-tag",
+		"dbaeumer.vscode-eslint",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"mgmcdermott.vscode-language-babel",
+		"coenraads.bracket-pair-colorizer-2"
+	]
+}
