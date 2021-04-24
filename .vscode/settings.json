@@ -94,5 +94,17 @@
 		"**/build": true,
 		"**/.build": true,
 		"**/.gh-pages": true
-	}
+	},
+	"sqltools.connections": [
+		{
+			"previewLimit": 50,
+			"server": "localhost",
+			"port": 5432,
+			"askForPassword": true,
+			"driver": "PostgreSQL",
+			"name": "cawfeehouse",
+			"database": "cawfee",
+			"username": "postgres"
+		}
+	]
 }
