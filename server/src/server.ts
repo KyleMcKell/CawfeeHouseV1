@@ -1,7 +1,7 @@
 import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
-import sampleRoutes from './routes/sample';
+import userRoutes from './routes/user';
 import cors from 'cors';
 
 const NAMESPACE = 'Server';
@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 });
 
 //$ Routes
-app.use('/sample', sampleRoutes);
+app.use('/users', userRoutes);
 
 //$ Error Handling
 app.use((req, res, next) => {
