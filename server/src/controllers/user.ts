@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import logging from '../config/logging';
 import bcryptjs from 'bcryptjs';
+import signJWT from '../functions/signJWT';
+import config from '../config/config';
+import IUser from '../interfaces/user';
+
+const database = config.database;
 
 const NAMESPACE = 'User';
 
