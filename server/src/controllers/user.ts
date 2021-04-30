@@ -28,15 +28,21 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 				.status(500)
 				.json({ message: hashError.message, error: hashError });
 		}
+		try {
+			let query =
+				'INTO INTO Users (username, email, password) VALUES($1, $2, $3) RETURNING *';
 
-		let query =
-			'INTO INTO Users (username, email, password) VALUES($1, $2, $3) RETURNING *';
+			const newUser = await pg.query(query, [username, email, password]);
+			res.json(newUser.rows[0]);
+		} catch (error) {
+			logging.error(NAMESPACE, error.message, error);
 
-		const newUser = await pg.query(query, [username, email, password]);
-		res.json(newUser.rows[0]);
+			return res.status(500).json({
+				message: error.message,
+				error,
+			});
+		}
 	});
-
-	//todo insert user into DB
 };
 
 //$ Login user and return token and user object
