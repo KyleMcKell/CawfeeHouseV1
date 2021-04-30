@@ -47,13 +47,26 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 
 //$ Login user and return token and user object
 const login = async (req: Request, res: Response, next: NextFunction) => {
-	let { username, password } = req.body;
+	let { userLoginID, password } = req.body;
+
+	//$ Set a fetchParameter to tell if the username provided was an email or a username
+	let fetchParameter;
+
+	if (userLoginID.includes('@')) {
+		//$ If the username has an @ symbol, parameter is the email
+		fetchParameter = 'email';
+		logging.info(NAMESPACE, 'Logging in with email');
+	} else {
+		//$ If the username doesn't contain and @, parameter is the username
+		fetchParameter = 'username';
+		logging.info(NAMESPACE, 'Logging in with username');
+	}
 
 	try {
 		//$ Query selects an array of length 1 where the username matches
-		let query = `SELECT * FROM users WHERE username = $1`;
+		let query = `SELECT * FROM users WHERE ${fetchParameter} = $1`;
 
-		const users = await pg.query<IUser>(query, [username]);
+		const users = await pg.query<IUser>(query, [userLoginID]);
 
 		//$ Compare password with bcrypt hash
 		bcryptjs.compare(password, users.rows[0].password, (error, result) => {
