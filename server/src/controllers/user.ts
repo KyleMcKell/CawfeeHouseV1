@@ -30,10 +30,10 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 		}
 		try {
 			let query =
-				'INTO INTO users (username, email, hashed_pw) VALUES($1, $2, $3) RETURNING *';
+				'INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *';
 
 			const newUser = await pg.query(query, [username, email, hash]);
-			res.json(newUser);
+			res.json(newUser.rows);
 		} catch (error) {
 			logging.error(NAMESPACE, error.message, error);
 
@@ -50,16 +50,19 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 	let { username, password } = req.body;
 
 	try {
-		let query = `SELECT * FROM users WHERE username = ${username}`;
+		//$ Query selects an array of length 1 where the username matches
+		let query = `SELECT * FROM users WHERE username = $1`;
 
-		const users = await pg.query<IUser>(query);
+		const users = await pg.query<IUser>(query, [username]);
 
+		//$ Compare password with bcrypt hash
 		bcryptjs.compare(password, users.rows[0].password, (error, result) => {
 			if (error) {
 				return res.status(401).json({
 					message: 'Password Mismatch',
 				});
 			} else if (result) {
+				//$ Sign a JWT to user if password matches
 				signJWT(users.rows[0], (error, token) => {
 					if (error) {
 						return res.status(401).json({
@@ -89,12 +92,12 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 //$ Return all users in database without passwords
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		let query = `SELECT id, username FROM users`;
+		let query = `SELECT id, username, email, password FROM users`;
 
 		const users = await pg.query<IUser>(query);
 
 		return res.status(200).json({
-			users,
+			users: users.rows,
 			count: users.rows.length,
 		});
 	} catch (error) {
