@@ -49,21 +49,21 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 const login = async (req: Request, res: Response, next: NextFunction) => {
 	let { userLoginID, password } = req.body;
 
-	//$ Set a fetchParameter to tell if the username provided was an email or a username
+	//$ Set a fetchParameter to tell if the userLoginID provided was an email or a username
 	let fetchParameter;
 
 	if (userLoginID.includes('@')) {
-		//$ If the username has an @ symbol, parameter is the email
+		//$ If the userLoginID has an @ symbol, parameter is the email
 		fetchParameter = 'email';
 		logging.info(NAMESPACE, 'Logging in with email');
 	} else {
-		//$ If the username doesn't contain and @, parameter is the username
+		//$ If the userLoginID doesn't contain and @, parameter is the username
 		fetchParameter = 'username';
 		logging.info(NAMESPACE, 'Logging in with username');
 	}
 
 	try {
-		//$ Query selects an array of length 1 where the username matches
+		//$ Query selects an array of length 1 where the fetchParameter matches
 		let query = `SELECT * FROM users WHERE ${fetchParameter} = $1`;
 
 		const users = await pg.query<IUser>(query, [userLoginID]);
