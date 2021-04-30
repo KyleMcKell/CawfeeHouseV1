@@ -19,7 +19,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 //$ Create a new user and store in DB
-const register = async (req: Request, res: Response, next: NextFunction) => {
+const register = (req: Request, res: Response, next: NextFunction) => {
 	let { username, email, password } = req.body;
 
 	bcryptjs.hash(password, 10, async (hashError, hash) => {
@@ -32,7 +32,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 			let query =
 				'INTO INTO Users (username, email, password) VALUES($1, $2, $3) RETURNING *';
 
-			const newUser = await pg.query(query, [username, email, password]);
+			const newUser = await pg.query(query, [username, email, hash]);
 			res.json(newUser.rows[0]);
 		} catch (error) {
 			logging.error(NAMESPACE, error.message, error);
