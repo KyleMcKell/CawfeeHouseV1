@@ -30,7 +30,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 		}
 		try {
 			let query =
-				'INSERT INTO users (username, email, password) VALUES($1, $2, $3) RETURNING *';
+				'INSERT INTO "Users" (username, email, password) VALUES($1, $2, $3) RETURNING *';
 
 			const newUser = await pg.query(query, [username, email, hash]);
 			res.json(newUser.rows);
@@ -64,7 +64,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 	try {
 		//$ Query selects an array of length 1 where the fetchParameter matches
-		let query = `SELECT * FROM users WHERE ${fetchParameter} = $1`;
+		let query = `SELECT * FROM "Users" WHERE ${fetchParameter} = $1`;
 
 		const users = await pg.query<IUser>(query, [userLoginID]);
 
@@ -105,7 +105,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 //$ Return all users in database without passwords
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		let query = `SELECT id, username, email, password FROM users`;
+		let query = `SELECT id, username, email, password FROM "Users"`;
 
 		const users = await pg.query<IUser>(query);
 
