@@ -1,5 +1,5 @@
 -- @block
-CREATE TABLE "Coffees"(
+CREATE TABLE "Coffee"(
   id SERIAL PRIMARY KEY NOT NULL,
   "ownerId" INT NOT NULL, 
   "coffeeName" VARCHAR(255) NOT NULL,
@@ -7,11 +7,11 @@ CREATE TABLE "Coffees"(
   notes VARCHAR(255),
   "roastType" VARCHAR(255),
   about TEXT,
-  FOREIGN KEY ("ownerId") REFERENCES "Users"(id)
+  FOREIGN KEY ("ownerId") REFERENCES "User"(id)
 );
 
 -- @block
-CREATE INDEX "coffeeIndex" ON "Coffees"("coffeeName")
+CREATE INDEX "coffeeIndex" ON "Coffee"("coffeeName")
 
 -- @block
-SELECT * FROM "Coffees";
+SELECT * FROM "Coffee";

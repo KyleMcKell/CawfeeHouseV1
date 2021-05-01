@@ -1,5 +1,5 @@
 -- @block
-CREATE TABLE "Users"(
+CREATE TABLE "User"(
   id SERIAL PRIMARY KEY NOT NULL,
   username VARCHAR(255) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
@@ -7,8 +7,8 @@ CREATE TABLE "Users"(
 );
 
 -- @block
-CREATE INDEX "emailIndex" ON "Users"(email);
-CREATE INDEX "usernameIndex" ON "Users"(username);
+CREATE INDEX "emailIndex" ON "User"(email);
+CREATE INDEX "usernameIndex" ON "User"(username);
 
 -- @block
-SELECT * FROM "Users"
+SELECT * FROM "User"
