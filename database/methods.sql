@@ -1,22 +1,14 @@
 -- @block
-CREATE TABLE Methods(
-  id SERIAL,
-  owner_id INT,
-  method_name VARCHAR(255),
+CREATE TABLE "Methods"(
+  id SERIAL PRIMARY KEY NOT NULL,
+  "ownerId" INT NOT NULL,
+  "methodName" VARCHAR(255) NOT NULL,
   about TEXT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (owner_id) REFERENCES Users(id)
+  FOREIGN KEY ("ownerId") REFERENCES "Users"(id)
 );
 
 -- @block
-INSERT INTO Methods (owner_id, method_name, about)
-VALUES 
-  (1, 'Aeropress', 'Aeropress!'),
-  (1, 'French Press', 'French Press!'),
-  (1, 'Pour Over', 'Pour Over V60!');
+CREATE INDEX "methodIndex" ON "Methods"("methodName");
 
 -- @block
-CREATE INDEX method_index ON Methods(method_name);
-
--- @block
-SELECT * FROM Methods;
+SELECT * FROM "Methods";

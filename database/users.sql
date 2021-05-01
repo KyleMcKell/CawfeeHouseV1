@@ -1,22 +1,14 @@
 -- @block
-CREATE TABLE Users(
-  id SERIAL,
-  firstname VARCHAR(255),
+CREATE TABLE "Users"(
+  id SERIAL PRIMARY KEY NOT NULL,
+  username VARCHAR(255) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
-  hashed_pw VARCHAR(255),
-  PRIMARY KEY (id)
+  password VARCHAR(255) NOT NULL
 );
 
 -- @block
-INSERT INTO Users (firstname, email, hashed_pw)
-VALUES
-  ('Kyle', 'hello@world.com', 'password'),
-  ('Kil', 'hell@underworld.com', 'password123');
+CREATE INDEX "emailIndex" ON "Users"(email);
+CREATE INDEX "usernameIndex" ON "Users"(username);
 
 -- @block
-CREATE INDEX email_index ON Users(email)
-
--- @block
-SELECT * FROM Users
-
-
+SELECT * FROM "Users"

@@ -1,23 +1,17 @@
 -- @block
-CREATE TABLE Coffees(
-  id SERIAL,
-  owner_id INT,
-  coffee_name VARCHAR(255),
+CREATE TABLE "Coffees"(
+  id SERIAL PRIMARY KEY NOT NULL,
+  "ownerId" INT NOT NULL, 
+  "coffeeName" VARCHAR(255) NOT NULL,
   brand VARCHAR(255),
   notes VARCHAR(255),
+  "roastType" VARCHAR(255),
   about TEXT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (owner_id) REFERENCES Users(id)
+  FOREIGN KEY ("ownerId") REFERENCES "Users"(id)
 );
 
 -- @block
-ALTER TABLE Coffees
-ADD COLUMN roast VARCHAR(255);
+CREATE INDEX "coffeeIndex" ON "Coffees"("coffeeName")
 
 -- @block
-INSERT INTO Coffees (owner_id, coffee_name, brand, notes, roast, about)
-VALUES
-  (1, 'Ethiopian', 'Consious', 'Coffee Cherries', 'light roast', 'This one is tasty and a light roast');
-
--- @block
-SELECT * FROM Coffees;
+SELECT * FROM "Coffees";

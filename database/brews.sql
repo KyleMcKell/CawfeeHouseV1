@@ -1,38 +1,25 @@
 -- @block
-CREATE TABLE Brews(
-  id SERIAL,
-  owner_id INT,
-  method_id INT,
-  coffee_id INT,
+CREATE TABLE "Brews"(
+  id SERIAL PRIMARY KEY NOT NULL,
+  "ownerId" INT NOT NULL,
+  "methodId" INT NOT NULL,
+  "coffeeId" INT NOT NULL,
+  "brewName" VARCHAR(255) NOT NULL,
   ratio INT,
-  brew_time INT,
-  water_temp INT,
+  "brewTime" INT,
+  "waterTemp" INT,
   flavorings VARCHAR(255),
-  grind_size VARCHAR(255),
-  is_favorite BOOLEAN,
+  "grindSize" VARCHAR(255),
+  ingredients VARCHAR(255),
+  "isFavorite" BOOLEAN DEFAULT FALSE NOT NULL ,
   about text,
-  PRIMARY KEY (id),
-  FOREIGN KEY (owner_id) REFERENCES Users(id),
-  FOREIGN KEY (method_id) REFERENCES Methods(id),
-  FOREIGN KEY (coffee_id) REFERENCES Coffees(id)
+  FOREIGN KEY ("ownerId") REFERENCES "Users"(id),
+  FOREIGN KEY ("methodId") REFERENCES "Methods"(id),
+  FOREIGN KEY ("coffeeId") REFERENCES "Coffees"(id)
 );
 
 -- @block
-ALTER TABLE brews
-ADD COLUMN brew_name VARCHAR(255);
+CREATE INDEX "brewIndex" ON "Brews"("brewName")
 
 -- @block
-INSERT INTO Brews (owner_id, method_id, coffee_id, ratio, brew_time, water_temp, flavorings, grind_size, is_favorite, about)
-VALUES
-  (1, 1, 1, 15, 120, 100, 'vanilla', 'medium fine', TRUE, 'Use this aeropress method for an easy morning brew');
-
--- @block
-UPDATE brews
-SET brew_name = 'vanilla aeropress ethiopian'
-WHERE id = 1
-
--- @block
-CREATE INDEX brew_index ON Brews(brew_name)
-
--- @block
-SELECT * FROM brews;
+SELECT * FROM "Brews";
