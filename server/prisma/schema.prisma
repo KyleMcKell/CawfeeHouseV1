@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Brews {
+model Brew {
   id          Int     @id @default(autoincrement())
   ownerId     Int
   methodId    Int
@@ -21,14 +21,14 @@ model Brews {
   ingredients String? @db.VarChar(255)
   isFavorite  Boolean @default(false)
   about       String?
-  coffee      Coffees @relation(fields: [coffeeId], references: [id])
-  method      Methods @relation(fields: [methodId], references: [id])
-  barista       Users   @relation(fields: [ownerId], references: [id])
+  coffee      Coffee  @relation(fields: [coffeeId], references: [id])
+  method      Method  @relation(fields: [methodId], references: [id])
+  barista       User  @relation(fields: [ownerId], references: [id])
 
   @@index([brewName], name: "brewIndex")
 }
 
-model Coffees {
+model Coffee {
   id         Int     @id @default(autoincrement())
   ownerId    Int
   coffeeName String  @db.VarChar(255)
@@ -36,31 +36,31 @@ model Coffees {
   notes      String? @db.VarChar(255)
   roastType  String? @db.VarChar(255)
   about      String?
-  barista    Users   @relation(fields: [ownerId], references: [id])
-  brews      Brews[]
+  barista    User    @relation(fields: [ownerId], references: [id])
+  brews      Brew[]
 
   @@index([coffeeName], name: "coffeeIndex")
 }
 
-model Methods {
+model Method {
   id         Int     @id @default(autoincrement())
   ownerId    Int
   methodName String  @db.VarChar(255)
   about      String?
-  barista    Users   @relation(fields: [ownerId], references: [id])
-  brews      Brews[]
+  barista    User    @relation(fields: [ownerId], references: [id])
+  brews      Brew[]
 
   @@index([methodName], name: "methodIndex")
 }
 
-model Users {
+model User {
   id       Int       @id @default(autoincrement())
   username String    @unique @db.VarChar(255)
   email    String    @unique @db.VarChar(255)
   password String    @db.VarChar(255)
-  brews    Brews[]
-  coffees  Coffees[]
-  methods  Methods[]
+  brews    Brew[]
+  coffees  Coffee[]
+  methods  Method[]
 
   @@index([email], name: "emailIndex")
   @@index([username], name: "usernameIndex")
