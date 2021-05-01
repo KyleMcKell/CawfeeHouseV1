@@ -2,13 +2,13 @@
 
 ## Registering User
 
-**_Route_**: /users/register
+**_Route_**: _POST_ /users/register
 
 Send in JSON containing username, password, and email
 
 ## Logging in User
 
-**_Route_**: /users/login
+**_Route_**: _POST_ /users/login
 
 Send in JSON containing userLoginID and password
 
