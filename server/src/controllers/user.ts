@@ -94,13 +94,11 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 //$ Return all users in database without passwords
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		let query = `SELECT id, username, email, password FROM "User"`;
-
-		const users = await pg.query<User>(query);
+		const users = await prisma.user.findMany();
 
 		return res.status(200).json({
-			users: users.rows,
-			count: users.rows.length,
+			users: users,
+			count: users.length,
 		});
 	} catch (error) {
 		logging.error(NAMESPACE, error.message, error);
