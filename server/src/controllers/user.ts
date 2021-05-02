@@ -3,9 +3,10 @@ import logging from '../config/logging';
 import bcryptjs from 'bcryptjs';
 import signJWT from '../functions/signJWT';
 import config from '../config/config';
-import IUser from '../interfaces/user';
+import { User } from '.prisma/client';
 
 const pg = config.database;
+const prisma = config.prisma;
 
 const NAMESPACE = 'User';
 
@@ -22,6 +23,17 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 const register = (req: Request, res: Response, next: NextFunction) => {
 	let { username, email, password } = req.body;
 
+	const createUser = async (hash: string) => {
+		const newUser = await prisma.user.create({
+			data: {
+				username,
+				email,
+				password: hash,
+			},
+		});
+		res.json(newUser);
+	};
+
 	bcryptjs.hash(password, 10, async (hashError, hash) => {
 		if (hashError) {
 			return res
@@ -29,11 +41,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 				.json({ message: hashError.message, error: hashError });
 		}
 		try {
-			let query =
-				'INSERT INTO "Users" (username, email, password) VALUES($1, $2, $3) RETURNING *';
-
-			const newUser = await pg.query(query, [username, email, hash]);
-			res.json(newUser.rows);
+			createUser(hash);
 		} catch (error) {
 			logging.error(NAMESPACE, error.message, error);
 
@@ -41,42 +49,71 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 				message: error.message,
 				error,
 			});
+		} finally {
+			async () => {
+				await prisma.$disconnect();
+			};
 		}
 	});
 };
 
+//$ Defines the user Fetch Parameter for logging in
+type LoginUserFetchParam = 'email' | 'username';
+
 //$ Login user and return token and user object
 const login = async (req: Request, res: Response, next: NextFunction) => {
-	let { userLoginID, password } = req.body;
+	const { userLoginID, password } = req.body;
 
-	//$ Set a fetchParameter to tell if the userLoginID provided was an email or a username
-	let fetchParameter;
+	let fetchParameter: LoginUserFetchParam; //$ Set a fetchParameter to tell if the userLoginID provided was an email or a username
 
 	if (userLoginID.includes('@')) {
-		//$ If the userLoginID has an @ symbol, parameter is the email
-		fetchParameter = 'email';
+		fetchParameter = 'email'; //$ If the userLoginID has an @ symbol, parameter is the email
 		logging.info(NAMESPACE, 'Logging in with email');
 	} else {
-		//$ If the userLoginID doesn't contain and @, parameter is the username
-		fetchParameter = 'username';
+		fetchParameter = 'username'; //$ If the userLoginID doesn't contain and @, parameter is the username
 		logging.info(NAMESPACE, 'Logging in with username');
 	}
 
+	//$ finds the user with either their email or their username
+	const findUser = async (fetchParameter: LoginUserFetchParam) => {
+		let user;
+		switch (fetchParameter) {
+			case 'email':
+				user = await prisma.user.findUnique({
+					where: {
+						email: userLoginID,
+					},
+				});
+				break;
+			case 'username':
+				user = await prisma.user.findUnique({
+					where: {
+						username: userLoginID,
+					},
+				});
+				break;
+			default:
+				return null;
+		}
+
+		return user;
+	};
+
 	try {
-		//$ Query selects an array of length 1 where the fetchParameter matches
-		let query = `SELECT * FROM "Users" WHERE ${fetchParameter} = $1`;
-
-		const users = await pg.query<IUser>(query, [userLoginID]);
-
+		const user = await findUser(fetchParameter);
+		if (!user) {
+			logging.error(NAMESPACE, `User ${userLoginID} not found`);
+			return res.status(404).json(`User "${userLoginID}" not found`);
+		}
 		//$ Compare password with bcrypt hash
-		bcryptjs.compare(password, users.rows[0].password, (error, result) => {
+		bcryptjs.compare(password, user.password, (error, result) => {
 			if (error) {
 				return res.status(401).json({
 					message: 'Password Mismatch',
 				});
 			} else if (result) {
 				//$ Sign a JWT to user if password matches
-				signJWT(users.rows[0], (error, token) => {
+				signJWT(user, (error, token) => {
 					if (error) {
 						return res.status(401).json({
 							message: 'Unable to Sign JWT',
@@ -86,7 +123,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 						return res.status(200).json({
 							message: 'Auth Successful',
 							token,
-							user: users.rows[0],
 						});
 					}
 				});
@@ -105,9 +141,9 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 //$ Return all users in database without passwords
 const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		let query = `SELECT id, username, email, password FROM "Users"`;
+		let query = `SELECT id, username, email, password FROM "User"`;
 
-		const users = await pg.query<IUser>(query);
+		const users = await pg.query<User>(query);
 
 		return res.status(200).json({
 			users: users.rows,

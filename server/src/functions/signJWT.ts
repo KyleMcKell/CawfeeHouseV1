@@ -1,13 +1,13 @@
+import { User } from '.prisma/client';
 import jwt from 'jsonwebtoken';
 import config from '../config/config';
 import logging from '../config/logging';
-import IUser from '../interfaces/user';
 
 const NAMESPACE = 'Auth';
 
 //$ Signs token for JWT
 const signJWT = (
-	user: IUser,
+	user: User,
 	callback: (error: Error | null, token: string | null) => void
 ): void => {
 	var timeSinceEpoch = new Date().getTime();

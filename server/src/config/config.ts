@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import pg from 'pg';
+import { PrismaClient } from '@prisma/client';
 
+const PRISMA = new PrismaClient();
 const Pool = pg.Pool;
 dotenv.config();
 
@@ -41,6 +43,7 @@ const DATABASE = new Pool({
 const config = {
 	server: SERVER,
 	database: DATABASE,
+	prisma: PRISMA,
 };
 
 export default config;
