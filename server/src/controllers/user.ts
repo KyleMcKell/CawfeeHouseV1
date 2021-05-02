@@ -3,8 +3,8 @@ import logging from '../config/logging';
 import bcryptjs from 'bcryptjs';
 import signJWT from '../functions/signJWT';
 import config from '../config/config';
-import createUser from '../functions/prisma/createUser';
-import findUser from '../functions/prisma/findUser';
+import createUser from '../functions/prisma/user/createUser';
+import findUser from '../functions/prisma/user/findUser';
 
 const prisma = config.prisma;
 

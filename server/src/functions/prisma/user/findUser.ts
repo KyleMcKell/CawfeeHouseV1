@@ -1,5 +1,5 @@
-import config from '../../config/config';
-import logging from '../../config/logging';
+import config from '../../../config/config';
+import logging from '../../../config/logging';
 
 const prisma = config.prisma;
 const NAMESPACE = 'User';
