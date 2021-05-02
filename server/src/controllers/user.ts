@@ -3,11 +3,9 @@ import logging from '../config/logging';
 import bcryptjs from 'bcryptjs';
 import signJWT from '../functions/signJWT';
 import config from '../config/config';
-import { User } from '.prisma/client';
 import createUser from '../functions/prisma/createUser';
 import findUser from '../functions/prisma/findUser';
 
-const pg = config.database;
 const prisma = config.prisma;
 
 const NAMESPACE = 'User';

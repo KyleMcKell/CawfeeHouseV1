@@ -7,7 +7,6 @@ import cors from 'cors';
 const NAMESPACE = 'Server';
 const app = express();
 const server = config.server;
-const database = config.database;
 
 //$ Logging requests
 app.use((req, res, next) => {
