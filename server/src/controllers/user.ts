@@ -4,6 +4,8 @@ import bcryptjs from 'bcryptjs';
 import signJWT from '../functions/signJWT';
 import config from '../config/config';
 import { User } from '.prisma/client';
+import createUser from '../functions/prisma/createUser';
+import findUser from '../functions/prisma/findUser';
 
 const pg = config.database;
 const prisma = config.prisma;
@@ -23,17 +25,6 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 const register = (req: Request, res: Response, next: NextFunction) => {
 	let { username, email, password } = req.body;
 
-	const createUser = async (hash: string) => {
-		const newUser = await prisma.user.create({
-			data: {
-				username,
-				email,
-				password: hash,
-			},
-		});
-		res.json(newUser);
-	};
-
 	bcryptjs.hash(password, 10, async (hashError, hash) => {
 		if (hashError) {
 			return res
@@ -41,7 +32,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 				.json({ message: hashError.message, error: hashError });
 		}
 		try {
-			createUser(hash);
+			createUser(hash, res, username, email);
 		} catch (error) {
 			logging.error(NAMESPACE, error.message, error);
 
@@ -57,53 +48,15 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 	});
 };
 
-//$ Defines the user Fetch Parameter for logging in
-type LoginUserFetchParam = 'email' | 'username';
-
 //$ Login user and return token and user object
 const login = async (req: Request, res: Response, next: NextFunction) => {
-	const { userLoginID, password } = req.body;
-
-	let fetchParameter: LoginUserFetchParam; //$ Set a fetchParameter to tell if the userLoginID provided was an email or a username
-
-	if (userLoginID.includes('@')) {
-		fetchParameter = 'email'; //$ If the userLoginID has an @ symbol, parameter is the email
-		logging.info(NAMESPACE, 'Logging in with email');
-	} else {
-		fetchParameter = 'username'; //$ If the userLoginID doesn't contain and @, parameter is the username
-		logging.info(NAMESPACE, 'Logging in with username');
-	}
-
-	//$ finds the user with either their email or their username
-	const findUser = async (fetchParameter: LoginUserFetchParam) => {
-		let user;
-		switch (fetchParameter) {
-			case 'email':
-				user = await prisma.user.findUnique({
-					where: {
-						email: userLoginID,
-					},
-				});
-				break;
-			case 'username':
-				user = await prisma.user.findUnique({
-					where: {
-						username: userLoginID,
-					},
-				});
-				break;
-			default:
-				return null;
-		}
-
-		return user;
-	};
+	const { userId, password } = req.body;
 
 	try {
-		const user = await findUser(fetchParameter);
+		const user = await findUser(userId);
 		if (!user) {
-			logging.error(NAMESPACE, `User ${userLoginID} not found`);
-			return res.status(404).json(`User "${userLoginID}" not found`);
+			logging.error(NAMESPACE, `User ${userId} not found`);
+			return res.status(404).json(`User "${userId}" not found`);
 		}
 		//$ Compare password with bcrypt hash
 		bcryptjs.compare(password, user.password, (error, result) => {

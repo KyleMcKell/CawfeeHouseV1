@@ -12,7 +12,9 @@ Send in JSON containing username, password, and email
 
 Send in JSON containing userLoginID and password
 
-**userLoginID**: string containing what the user puts into the sign in field, will be either an email or a username and treated accordingly
+**userId**: string containing what the user puts into the sign in field, will be either an email or a username and treated accordingly
+
+**password** string containing password from request body, compared to hash stored in database
 
 ## Get all Users
 
