@@ -5,10 +5,10 @@ const prisma = config.prisma;
 const NAMESPACE = 'User';
 
 //$ Defines the user Fetch Parameter for logging in
-type UserID = 'email' | 'username';
+type UserIdType = 'email' | 'username';
 
 const findLoginParameter = (userId: string) => {
-	let fetchParameter: UserID; //$ Set a fetchParameter to tell if the userLoginID provided was an email or a username
+	let fetchParameter: UserIdType; //$ Set a fetchParameter to tell if the userLoginID provided was an email or a username
 
 	if (userId.includes('@')) {
 		fetchParameter = 'email'; //$ If the userLoginID has an @ symbol, parameter is the email
@@ -26,6 +26,7 @@ const findUser = async (userLoginID: string) => {
 	const fetchParameter = findLoginParameter(userLoginID);
 
 	let user;
+
 	switch (fetchParameter) {
 		case 'email':
 			user = await prisma.user.findUnique({
@@ -34,6 +35,7 @@ const findUser = async (userLoginID: string) => {
 				},
 			});
 			break;
+
 		case 'username':
 			user = await prisma.user.findUnique({
 				where: {
@@ -41,9 +43,11 @@ const findUser = async (userLoginID: string) => {
 				},
 			});
 			break;
+
 		default:
 			return null;
 	}
+
 	return user;
 };
 
