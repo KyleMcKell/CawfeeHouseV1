@@ -2,13 +2,13 @@
 
 ## Registering User
 
-**_POST_**: /users/register
+**_POST_**: /user/register
 
 Send in JSON containing username, password, and email
 
 ## Logging in User
 
-**_POST_**: /users/login
+**_POST_**: /user/login
 
 Send in JSON containing userLoginID and password
 
@@ -18,7 +18,7 @@ Send in JSON containing userLoginID and password
 
 ## Get all Users
 
-**_GET_**: /users/get/all
+**_GET_**: /user/get/all
 
 Gets all users from database
 
@@ -26,7 +26,7 @@ Protected route
 
 ## Validate User
 
-**_GET_**: /users/validate
+**_GET_**: /user/validate
 
 Validates user via a middleware to see if they can perform an action
 
