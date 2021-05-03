@@ -2,6 +2,7 @@ import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
 import userRoutes from './routes/user';
+import coffeeRoutes from './routes/coffee';
 import cors from 'cors';
 
 const NAMESPACE = 'Server';
@@ -49,7 +50,7 @@ app.use((req, res, next) => {
 
 //$ Routes
 app.use('/user', userRoutes); //? User Route, contains Login, Register, Get All, Validate
-//? Coffee Route
+app.use('/coffee', coffeeRoutes); //? Coffee Route
 
 //$ Error Handling
 app.use((req, res, next) => {
