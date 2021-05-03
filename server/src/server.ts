@@ -48,9 +48,7 @@ app.use((req, res, next) => {
 });
 
 //$ Routes
-//? User Route, contains Login, Register, Get All, Validate
-app.use('/users', userRoutes);
-
+app.use('/users', userRoutes); //? User Route, contains Login, Register, Get All, Validate
 //? Coffee Route
 
 //$ Error Handling
