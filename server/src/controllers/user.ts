@@ -11,6 +11,7 @@ const prisma = config.prisma;
 const NAMESPACE = 'User';
 
 //$ Protected Route for testing to make sure token provided is working properly
+//$ Points to a middleware that extracts the jwt
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
 	logging.info(NAMESPACE, 'Token validated, user authorized');
 
