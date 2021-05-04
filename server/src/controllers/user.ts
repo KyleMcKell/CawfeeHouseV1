@@ -1,17 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
 import logging from '../config/logging';
 import bcryptjs from 'bcryptjs';
-import signJWT from '../functions/signJWT';
+import signJWT from '../functions/jwt/signJWT';
 import config from '../config/config';
 import createUser from '../functions/prisma/user/createUser';
 import findUser from '../functions/prisma/user/findUser';
+import { User } from '@prisma/client';
+import UserLoginType from '../types/user/UserLoginType';
 
 const prisma = config.prisma;
 
 const NAMESPACE = 'User';
 
 //$ Protected Route for testing to make sure token provided is working properly
-const validateToken = (req: Request, res: Response, next: NextFunction) => {
+//$ Points to a middleware that extracts the jwt
+const validateToken = (req: Request, res: Response) => {
 	logging.info(NAMESPACE, 'Token validated, user authorized');
 
 	return res.status(200).json({
@@ -20,8 +23,8 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 //$ Create a new user and store in DB
-const register = (req: Request, res: Response, next: NextFunction) => {
-	let { username, email, password } = req.body;
+const register = (req: Request, res: Response) => {
+	let { username, email, password } = req.body as User; //$ Request body mirrors User prisma Model
 
 	bcryptjs.hash(password, 10, async (hashError, hash) => {
 		if (hashError) {
@@ -30,30 +33,28 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 				.json({ message: hashError.message, error: hashError });
 		}
 		try {
-			createUser(hash, res, username, email);
+			//$ Creates new user then responds with json the user
+			const newUser = createUser(hash, username, email);
+			res.status(201).json(newUser);
 		} catch (error) {
+			//$ If failure, respond with a 500 server error
 			logging.error(NAMESPACE, error.message, error);
 
 			return res.status(500).json({
 				message: error.message,
 				error,
 			});
-		} finally {
-			async () => {
-				await prisma.$disconnect();
-			};
 		}
 	});
 };
 
 //$ Login user and return token and user object
-const login = async (req: Request, res: Response, next: NextFunction) => {
-	const { userId, password } = req.body;
+const login = async (req: Request, res: Response) => {
+	const { userId, password } = req.body as UserLoginType;
 
 	try {
 		const user = await findUser(userId);
 		if (!user) {
-			logging.error(NAMESPACE, `User ${userId} not found`);
 			return res.status(404).json(`User "${userId}" not found`);
 		}
 		//$ Compare password with bcrypt hash
@@ -90,7 +91,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 //$ Return all users in database without passwords
-const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+const getAllUsers = async (req: Request, res: Response) => {
 	try {
 		const users = await prisma.user.findMany();
 

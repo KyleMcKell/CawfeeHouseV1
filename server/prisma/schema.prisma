@@ -21,11 +21,9 @@ model Brew {
   ingredients String? @db.VarChar(255)
   isFavorite  Boolean @default(false)
   about       String?
-  coffee      Coffee  @relation(fields: [coffeeId], references: [id])
-  method      Method  @relation(fields: [methodId], references: [id])
-  barista       User  @relation(fields: [ownerId], references: [id])
-
-  @@index([brewName], name: "brewIndex")
+  Coffee      Coffee  @relation(fields: [coffeeId], references: [id])
+  Method      Method  @relation(fields: [methodId], references: [id])
+  User        User    @relation(fields: [ownerId], references: [id])
 }
 
 model Coffee {
@@ -36,10 +34,8 @@ model Coffee {
   notes      String? @db.VarChar(255)
   roastType  String? @db.VarChar(255)
   about      String?
-  barista    User    @relation(fields: [ownerId], references: [id])
-  brews      Brew[]
-
-  @@index([coffeeName], name: "coffeeIndex")
+  User       User    @relation(fields: [ownerId], references: [id])
+  Brew       Brew[]
 }
 
 model Method {
@@ -47,21 +43,17 @@ model Method {
   ownerId    Int
   methodName String  @db.VarChar(255)
   about      String?
-  barista    User    @relation(fields: [ownerId], references: [id])
-  brews      Brew[]
-
-  @@index([methodName], name: "methodIndex")
+  User       User    @relation(fields: [ownerId], references: [id])
+  Brew       Brew[]
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  username String    @unique @db.VarChar(255)
-  email    String    @unique @db.VarChar(255)
-  password String    @db.VarChar(255)
-  brews    Brew[]
-  coffees  Coffee[]
-  methods  Method[]
-
-  @@index([email], name: "emailIndex")
-  @@index([username], name: "usernameIndex")
+  id       Int      @id @default(autoincrement())
+  username String   @unique @db.VarChar(255)
+  email    String   @unique @db.VarChar(255)
+  isAdmin  Boolean
+  password String   @db.VarChar(255)
+  Brew     Brew[]
+  Coffee   Coffee[]
+  Method   Method[]
 }
