@@ -15,7 +15,6 @@ const getUserCoffees = async (req: Request, res: Response) => {
 				where: { ownerId },
 			});
 			res.status(200).json(coffees);
-			await prisma.$disconnect();
 		} else {
 			return res.status(403);
 		}

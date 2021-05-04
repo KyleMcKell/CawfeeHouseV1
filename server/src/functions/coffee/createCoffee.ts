@@ -21,8 +21,6 @@ const createCoffee = async (
 		},
 	});
 
-	await prisma.$disconnect();
-
 	return newCoffee;
 };
 

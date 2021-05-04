@@ -15,8 +15,6 @@ const createUser = async (hash: string, username: string, email: string) => {
 		},
 	});
 
-	await prisma.$disconnect();
-
 	return newUser;
 };
 

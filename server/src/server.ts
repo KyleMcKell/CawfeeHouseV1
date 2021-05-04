@@ -57,7 +57,7 @@ app.use('/method', methodRoutes); //? Method Route, contains Add, Get User's Met
 app.use('/brew', brewRoutes); //? Brew Route, contains Add, Get User's Brews
 
 //$ Error Handling
-app.use((req, res, next) => {
+app.use((req, res) => {
 	const error = new Error('not found');
 
 	return res.status(404).json({

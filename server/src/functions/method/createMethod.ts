@@ -15,8 +15,6 @@ const createMethod = async (
 		},
 	});
 
-	await prisma.$disconnect();
-
 	return newMethod;
 };
 

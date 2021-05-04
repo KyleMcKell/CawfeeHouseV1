@@ -15,7 +15,6 @@ const getUserMethods = async (req: Request, res: Response) => {
 				where: { ownerId },
 			});
 			res.status(200).json(methods);
-			await prisma.$disconnect();
 		} else {
 			return res.status(403);
 		}

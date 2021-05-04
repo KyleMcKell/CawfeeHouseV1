@@ -1,6 +1,6 @@
 type BrewSearchConstraintType = {
-	methodId?: number;
-	coffeeId?: number;
+	methodId: number;
+	coffeeId: number;
 };
 
 export default BrewSearchConstraintType;

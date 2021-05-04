@@ -35,8 +35,6 @@ const createBrew = async (
 		},
 	});
 
-	await prisma.$disconnect();
-
 	return newBrew;
 };
 

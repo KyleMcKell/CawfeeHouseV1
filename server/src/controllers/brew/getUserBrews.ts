@@ -19,7 +19,6 @@ const getUserBrews = async (req: Request, res: Response) => {
 			});
 
 			res.status(200).json(brews);
-			await prisma.$disconnect();
 		} else {
 			return res.status(403);
 		}
