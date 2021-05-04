@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import logging from '../config/logging';
 import bcryptjs from 'bcryptjs';
-import signJWT from '../functions/signJWT';
+import signJWT from '../functions/jwt/signJWT';
 import config from '../config/config';
 import createUser from '../functions/prisma/user/createUser';
 import findUser from '../functions/prisma/user/findUser';

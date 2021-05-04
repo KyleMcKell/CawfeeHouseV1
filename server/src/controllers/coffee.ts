@@ -11,7 +11,7 @@ const addCoffee = (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { coffeeName, brand, notes, roastType, about } = req.body;
 		if (coffeeName) {
-			createCoffee();
+			// createCoffee();
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
