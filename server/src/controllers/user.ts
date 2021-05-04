@@ -31,7 +31,8 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 				.json({ message: hashError.message, error: hashError });
 		}
 		try {
-			createUser(hash, res, username, email);
+			const newUser = createUser(hash, res, username, email);
+			res.status(201).json(newUser);
 		} catch (error) {
 			logging.error(NAMESPACE, error.message, error);
 

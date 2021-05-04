@@ -1,17 +1,14 @@
-import { User } from '.prisma/client';
-import { Response } from 'express';
 import config from '../../../config/config';
 
 const prisma = config.prisma;
 
 const createCoffee = async (
-	res: Response,
 	ownerId: number,
 	coffeeName: string,
-	brand: string = '',
-	notes: string = '',
-	roastType: string = '',
-	about: string = ''
+	brand: string | null,
+	notes: string | null,
+	roastType: string | null,
+	about: string | null
 ) => {
 	const newCoffee = await prisma.coffee.create({
 		data: {
@@ -23,7 +20,7 @@ const createCoffee = async (
 			about,
 		},
 	});
-	res.json(newCoffee);
+	return newCoffee;
 };
 
 export default createCoffee;
