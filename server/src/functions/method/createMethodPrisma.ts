@@ -2,7 +2,7 @@ import config from '../../config/config';
 
 const prisma = config.prisma;
 
-const createMethod = async (
+const createMethodPrisma = async (
 	ownerId: number,
 	methodName: string,
 	about: string | null
@@ -18,4 +18,4 @@ const createMethod = async (
 	return newMethod;
 };
 
-export default createMethod;
+export default createMethodPrisma;

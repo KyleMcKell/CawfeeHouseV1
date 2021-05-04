@@ -1,6 +1,7 @@
 import config from '../../config/config';
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
+import getMethodPrisma from '../../functions/method/getMethodPrisma';
 
 const NAMESPACE = 'Method';
 
@@ -13,9 +14,7 @@ const getMethod = async (req: Request, res: Response) => {
 		const { id } = req.params;
 
 		if (ownerId) {
-			const method = await prisma.method.findFirst({
-				where: { id: parseInt(id), ownerId },
-			});
+			const method = await getMethodPrisma(ownerId, parseInt(id));
 
 			res.status(200).json(method);
 		} else {

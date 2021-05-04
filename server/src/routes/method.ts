@@ -13,4 +13,7 @@ router.get('/', extractJWT, controller.getAllMethods);
 //$ Gets a method that belongs to the user
 router.get('/:id', extractJWT, controller.getMethod);
 
+//$ Updates a method
+// router.put('/:id', extractJWT, controller.updateMethod);
+
 export = router;

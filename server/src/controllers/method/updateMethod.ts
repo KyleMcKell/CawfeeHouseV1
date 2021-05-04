@@ -5,13 +5,17 @@ import createMethodPrisma from '../../functions/method/createMethodPrisma';
 
 const NAMESPACE = 'Method';
 
-const addMethod = async (req: Request, res: Response) => {
+const updateMethod = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id; //$ res.locals.jwt set in middleware
 		const { methodName, about } = req.body as Method; //$ Request body mirrors Method prisma Model
 		if (methodName && ownerId) {
-			const newMethod = await createMethodPrisma(ownerId, methodName, about);
-			return res.status(201).json(newMethod);
+			const updatedMethod = await createMethodPrisma(
+				ownerId,
+				methodName,
+				about
+			);
+			return res.status(201).json(updatedMethod);
 		} else if (!ownerId) {
 			//$ If JWT doesn't control ownerId, user isn't auth'd
 			return res.status(401).json('User not Authorized');
@@ -28,4 +32,4 @@ const addMethod = async (req: Request, res: Response) => {
 	}
 };
 
-export default addMethod;
+export default updateMethod;
