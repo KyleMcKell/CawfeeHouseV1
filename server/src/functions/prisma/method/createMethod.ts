@@ -4,26 +4,20 @@ const prisma = config.prisma;
 
 const createMethod = async (
 	ownerId: number,
-	coffeeName: string,
-	brand: string | null,
-	notes: string | null,
-	roastType: string | null,
+	methodName: string,
 	about: string | null
 ) => {
-	const newCoffee = await prisma.coffee.create({
+	const newMethod = await prisma.method.create({
 		data: {
 			ownerId,
-			coffeeName,
-			brand,
-			notes,
-			roastType,
+			methodName,
 			about,
 		},
 	});
 	async () => {
 		await prisma.$disconnect();
 	};
-	return newCoffee;
+	return newMethod;
 };
 
 export default createMethod;
