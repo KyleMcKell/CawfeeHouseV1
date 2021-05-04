@@ -14,7 +14,7 @@ const NAMESPACE = 'User';
 
 //$ Protected Route for testing to make sure token provided is working properly
 //$ Points to a middleware that extracts the jwt
-const validateToken = (req: Request, res: Response, next: NextFunction) => {
+const validateToken = (req: Request, res: Response) => {
 	logging.info(NAMESPACE, 'Token validated, user authorized');
 
 	return res.status(200).json({
@@ -23,8 +23,8 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 };
 
 //$ Create a new user and store in DB
-const register = (req: Request, res: Response, next: NextFunction) => {
-	let { username, email, password } = req.body as User;
+const register = (req: Request, res: Response) => {
+	let { username, email, password } = req.body as User; //$ Request body mirrors User prisma Model
 
 	bcryptjs.hash(password, 10, async (hashError, hash) => {
 		if (hashError) {
@@ -33,10 +33,11 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 				.json({ message: hashError.message, error: hashError });
 		}
 		try {
+			//$ Creates new user then responds with json the user
 			const newUser = createUser(hash, username, email);
 			res.status(201).json(newUser);
 		} catch (error) {
-			4;
+			//$ If failure, respond with a 500 server error
 			logging.error(NAMESPACE, error.message, error);
 
 			return res.status(500).json({
@@ -48,7 +49,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 };
 
 //$ Login user and return token and user object
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (req: Request, res: Response) => {
 	const { userId, password } = req.body as UserLoginType;
 
 	try {
@@ -90,7 +91,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 //$ Return all users in database without passwords
-const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+const getAllUsers = async (req: Request, res: Response) => {
 	try {
 		const users = await prisma.user.findMany();
 
