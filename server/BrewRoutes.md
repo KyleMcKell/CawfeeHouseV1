@@ -42,3 +42,9 @@ ownerId: Int = Id of user who added method
 methodName: String = Name given to method by user
 
 about?: String = Info on how to do the method
+
+## Get user brew
+
+**_GET_**: /brew
+
+Get all brews that belong to a user

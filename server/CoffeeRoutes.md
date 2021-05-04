@@ -37,7 +37,7 @@ roastType?: String = Roast Type of coffee
 
 about?: String = Any additional info about coffee
 
-## Get all coffees
+## Get user coffees
 
 **_GET_**: /coffee
 
