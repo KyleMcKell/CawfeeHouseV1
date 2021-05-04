@@ -1,11 +1,9 @@
 import config from '../../../config/config';
 import logging from '../../../config/logging';
+import UserIdType from '../../../types/user/UserIdType';
 
 const prisma = config.prisma;
 const NAMESPACE = 'User';
-
-//$ Defines the user Fetch Parameter for logging in
-type UserIdType = 'email' | 'username';
 
 const findLoginParameter = (userId: string) => {
 	let fetchParameter: UserIdType; //$ Set a fetchParameter to tell if the userLoginID provided was an email or a username
@@ -22,8 +20,8 @@ const findLoginParameter = (userId: string) => {
 };
 
 //$ finds the user with either their email or their username
-const findUser = async (userLoginID: string) => {
-	const fetchParameter = findLoginParameter(userLoginID);
+const findUser = async (userId: string) => {
+	const fetchParameter = findLoginParameter(userId);
 
 	let user;
 
@@ -31,7 +29,7 @@ const findUser = async (userLoginID: string) => {
 		case 'email':
 			user = await prisma.user.findUnique({
 				where: {
-					email: userLoginID,
+					email: userId,
 				},
 			});
 			break;
@@ -39,7 +37,7 @@ const findUser = async (userLoginID: string) => {
 		case 'username':
 			user = await prisma.user.findUnique({
 				where: {
-					username: userLoginID,
+					username: userId,
 				},
 			});
 			break;

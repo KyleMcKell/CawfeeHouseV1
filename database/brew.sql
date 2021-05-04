@@ -23,3 +23,6 @@ CREATE INDEX "brewIndex" ON "Brew"("brewName")
 
 -- @block
 SELECT * FROM "Brew";
+
+-- @block
+DROP TABLE "Brew";

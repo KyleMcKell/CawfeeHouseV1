@@ -1,7 +1,7 @@
 import { User } from '.prisma/client';
 import jwt from 'jsonwebtoken';
-import config from '../config/config';
-import logging from '../config/logging';
+import config from '../../config/config';
+import logging from '../../config/logging';
 
 const NAMESPACE = 'Auth';
 
@@ -10,16 +10,22 @@ const signJWT = (
 	user: User,
 	callback: (error: Error | null, token: string | null) => void
 ): void => {
-	var timeSinceEpoch = new Date().getTime();
-	var expirationTime =
+	//$ Sets time for expiring token
+	const timeSinceEpoch = new Date().getTime();
+	const expirationTime =
 		timeSinceEpoch + Number(config.server.token.expireTime) * 100000;
-	var expirationTimeInSeconds = Math.floor(expirationTime / 1000);
+	const expirationTimeInSeconds = Math.floor(expirationTime / 1000);
 
 	logging.info(NAMESPACE, `Attempting to sign token for ${user.username}`);
 
 	try {
 		jwt.sign(
-			{ username: user.username },
+			{
+				username: user.username,
+				email: user.email,
+				id: user.id,
+				isAdmin: user.isAdmin,
+			},
 			config.server.token.secret,
 			{
 				issuer: config.server.token.issuer,
