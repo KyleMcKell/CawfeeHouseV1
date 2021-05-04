@@ -19,7 +19,12 @@ const signJWT = (
 
 	try {
 		jwt.sign(
-			{ username: user.username, email: user.email, id: user.id },
+			{
+				username: user.username,
+				email: user.email,
+				id: user.id,
+				isAdmin: user.isAdmin,
+			},
 			config.server.token.secret,
 			{
 				issuer: config.server.token.issuer,

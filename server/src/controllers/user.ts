@@ -54,7 +54,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const user = await findUser(userId);
 		if (!user) {
-			logging.error(NAMESPACE, `User ${userId} not found`);
 			return res.status(404).json(`User "${userId}" not found`);
 		}
 		//$ Compare password with bcrypt hash
