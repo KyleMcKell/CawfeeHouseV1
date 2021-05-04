@@ -1,19 +1,15 @@
-import config from '../../config/config';
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
+import { getAllCoffeesPrisma } from '../../functions/prisma/coffee';
 
 const NAMESPACE = 'Coffee';
-
-const prisma = config.prisma;
 
 const getAllCoffees = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
 		if (ownerId) {
-			const coffees = await prisma.coffee.findMany({
-				where: { ownerId },
-			});
+			const coffees = await getAllCoffeesPrisma(ownerId);
 			res.status(200).json(coffees);
 		} else {
 			return res.status(403);

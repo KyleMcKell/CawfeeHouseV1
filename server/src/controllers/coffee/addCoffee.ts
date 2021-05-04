@@ -1,7 +1,7 @@
 import { Coffee } from '@prisma/client';
 import { Request, Response } from 'express';
 import logging from '../../config/logging';
-import createCoffee from '../../functions/prisma/coffee/createCoffee';
+import { createCoffeePrisma } from '../../functions/prisma/coffee';
 
 const NAMESPACE = 'Coffee';
 
@@ -10,7 +10,7 @@ const addCoffee = async (req: Request, res: Response) => {
 		const ownerId: number = res.locals.jwt.id; //$ res.locals.jwt set in middleware
 		const { coffeeName, brand, notes, roastType, about } = req.body as Coffee; //$ Request body mirrors Coffee prisma Model
 		if (coffeeName && ownerId) {
-			const newCoffee = await createCoffee(
+			const newCoffee = await createCoffeePrisma(
 				ownerId,
 				coffeeName,
 				brand,
