@@ -2,19 +2,19 @@ import config from '../../config/config';
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
 
-const NAMESPACE = 'Method';
+const NAMESPACE = 'Brew';
 
 const prisma = config.prisma;
 
-const getUserMethods = async (req: Request, res: Response) => {
+const getUserBrews = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
 		if (ownerId) {
-			const methods = await prisma.method.findMany({
+			const brews = await prisma.brew.findMany({
 				where: { ownerId },
 			});
-			res.status(200).json(methods);
+			res.status(200).json(brews);
 			await prisma.$disconnect();
 		} else {
 			return res.status(403);
@@ -28,4 +28,4 @@ const getUserMethods = async (req: Request, res: Response) => {
 	}
 };
 
-export default getUserMethods;
+export default getUserBrews;
