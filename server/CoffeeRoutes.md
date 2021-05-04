@@ -6,6 +6,15 @@
 
 Adds a coffee to the database.
 
+Request body must contain:
+{
+coffeeName: string,
+brand: string | null,
+notes: string | null,
+roastType: string | null,
+about: string | null
+}
+
 Sends JSON containing:
 {
 ownerId,
