@@ -31,19 +31,16 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 				.json({ message: hashError.message, error: hashError });
 		}
 		try {
-			const newUser = createUser(hash, res, username, email);
+			const newUser = createUser(hash, username, email);
 			res.status(201).json(newUser);
 		} catch (error) {
+			4;
 			logging.error(NAMESPACE, error.message, error);
 
 			return res.status(500).json({
 				message: error.message,
 				error,
 			});
-		} finally {
-			async () => {
-				await prisma.$disconnect();
-			};
 		}
 	});
 };
