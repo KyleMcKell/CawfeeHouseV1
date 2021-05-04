@@ -1,15 +1,13 @@
 import { Request, Response } from 'express';
 import logging from '../../config/logging';
-import config from '../../config/config';
+import { getAllUsersPrisma } from '../../functions/prisma/user';
 
 const NAMESPACE = 'User';
-
-const prisma = config.prisma;
 
 //$ Return all users in database without passwords
 const getAllUsers = async (req: Request, res: Response) => {
 	try {
-		const users = await prisma.user.findMany();
+		const users = await getAllUsersPrisma();
 
 		return res.status(200).json({
 			users: users,

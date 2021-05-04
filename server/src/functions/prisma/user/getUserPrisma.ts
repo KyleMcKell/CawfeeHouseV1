@@ -20,7 +20,7 @@ const findLoginParameter = (userId: string) => {
 };
 
 //$ finds the user with either their email or their username
-const findUser = async (userId: string) => {
+const getUserPrisma = async (userId: string) => {
 	const fetchParameter = findLoginParameter(userId);
 
 	let user;
@@ -49,4 +49,4 @@ const findUser = async (userId: string) => {
 	return user;
 };
 
-export default findUser;
+export default getUserPrisma;

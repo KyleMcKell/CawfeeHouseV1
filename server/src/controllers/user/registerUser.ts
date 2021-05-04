@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import logging from '../../config/logging';
 import bcryptjs from 'bcryptjs';
 import { User } from '@prisma/client';
-import createUser from '../../functions/prisma/user/createUser';
+import { createUserPrisma } from '../../functions/prisma/user';
 
 const NAMESPACE = 'User';
 
@@ -18,7 +18,7 @@ const registerUser = (req: Request, res: Response) => {
 		}
 		try {
 			//$ Creates new user then responds with json the user
-			const newUser = createUser(hash, username, email);
+			const newUser = createUserPrisma(hash, username, email);
 			res.status(201).json(newUser);
 		} catch (error) {
 			//$ If failure, respond with a 500 server error
