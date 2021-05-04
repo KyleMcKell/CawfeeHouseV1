@@ -24,8 +24,8 @@ const addBrew = async (req: Request, res: Response) => {
 		if (brewName && ownerId) {
 			const newBrew = await createBrew(
 				ownerId,
-				methodId,
 				coffeeId,
+				methodId,
 				brewName,
 				ratio,
 				brewTime,

@@ -16,6 +16,8 @@ const createBrew = async (
 	isFavorite: boolean | undefined,
 	about: string | null
 ) => {
+	console.log(`Method Id: ${methodId}`);
+	console.log(`Coffee Id: ${coffeeId}`);
 	const newBrew = await prisma.brew.create({
 		data: {
 			ownerId,
