@@ -6,7 +6,7 @@ import logging from '../../config/logging';
 const NAMESPACE = 'Auth';
 
 //$ Signs token for JWT
-const signJWT = (
+const signUserJWT = (
 	user: User,
 	callback: (error: Error | null, token: string | null) => void
 ): void => {
@@ -46,4 +46,4 @@ const signJWT = (
 	}
 };
 
-export default signJWT;
+export default signUserJWT;

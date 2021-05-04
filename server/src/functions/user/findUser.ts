@@ -1,6 +1,6 @@
-import config from '../../../config/config';
-import logging from '../../../config/logging';
-import UserIdType from '../../../types/user/UserIdType';
+import config from '../../config/config';
+import logging from '../../config/logging';
+import UserIdType from '../../types/user/UserIdType';
 
 const prisma = config.prisma;
 const NAMESPACE = 'User';
@@ -45,6 +45,10 @@ const findUser = async (userId: string) => {
 		default:
 			return null;
 	}
+
+	async () => {
+		await prisma.$disconnect();
+	};
 
 	return user;
 };
