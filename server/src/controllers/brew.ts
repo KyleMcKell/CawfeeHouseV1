@@ -8,10 +8,35 @@ const NAMESPACE = 'Brew';
 const addBrew = (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
-		const { brewName, about } = req.body as Brew;
+		const {
+			methodId,
+			coffeeId,
+			brewName,
+			ratio,
+			brewTime,
+			waterTemp,
+			flavorings,
+			grindSize,
+			ingredients,
+			isFavorite,
+			about,
+		} = req.body as Brew;
 		if (brewName && ownerId) {
-			// const newBrew = createBrew(ownerId, brewName, about);
-			// return res.status(201).json(newBrew);
+			const newBrew = createBrew(
+				ownerId,
+				methodId,
+				coffeeId,
+				brewName,
+				ratio,
+				brewTime,
+				waterTemp,
+				flavorings,
+				grindSize,
+				ingredients,
+				isFavorite,
+				about
+			);
+			res.status(201).json(newBrew);
 		} else if (!ownerId) {
 			return res.status(401).json('User not Authorized');
 		} else if (!brewName) {
