@@ -8,6 +8,6 @@ const router = express.Router();
 router.post('/add', extractJWT, controller.addMethod);
 
 //$ Gets all coffees that belong to a user
-router.get('/', extractJWT, controller.getUserMethods);
+router.get('/', extractJWT, controller.getAllMethods);
 
 export = router;

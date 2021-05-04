@@ -1,4 +1,4 @@
 import addCoffee from './addCoffee';
-import getUserCoffees from './getUserCoffees';
+import getAllCoffees from './getAllCoffees';
 
-export default { addCoffee, getUserCoffees };
+export default { addCoffee, getAllCoffees };

@@ -6,7 +6,7 @@ const NAMESPACE = 'Brew';
 
 const prisma = config.prisma;
 
-const getUserBrews = async (req: Request, res: Response) => {
+const getAllBrews = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
@@ -29,4 +29,4 @@ const getUserBrews = async (req: Request, res: Response) => {
 	}
 };
 
-export default getUserBrews;
+export default getAllBrews;

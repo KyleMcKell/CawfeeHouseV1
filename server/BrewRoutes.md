@@ -43,7 +43,7 @@ methodName: String = Name given to method by user
 
 about?: String = Info on how to do the method
 
-## Get user brews
+## Get all brews
 
 **_GET_**: /brew
 

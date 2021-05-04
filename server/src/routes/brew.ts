@@ -8,6 +8,9 @@ const router = express.Router();
 router.post('/add', extractJWT, controller.addBrew);
 
 //$ Gets all brews that belong to a user
-router.get('/', extractJWT, controller.getUserBrews);
+router.get('/', extractJWT, controller.getAllBrews);
+
+//$ Gets a brew that belongs to the user
+router.get('/:id', extractJWT, controller.getBrew);
 
 export = router;
