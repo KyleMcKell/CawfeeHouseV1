@@ -1,7 +1,7 @@
 import { Coffee } from '@prisma/client';
 import { Request, Response } from 'express';
 import logging from '../../config/logging';
-import { createCoffeePrisma } from '../../functions/prisma/coffee';
+import { createCoffeePrisma } from '../../functions/coffee';
 
 const NAMESPACE = 'Coffee';
 

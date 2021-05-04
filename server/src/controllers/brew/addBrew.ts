@@ -1,7 +1,7 @@
 import { Brew } from '@prisma/client';
 import { Request, Response } from 'express';
 import logging from '../../config/logging';
-import { createBrewPrisma } from '../../functions/prisma/brew';
+import { createBrewPrisma } from '../../functions/brew';
 
 const NAMESPACE = 'Brew';
 

@@ -1,6 +1,6 @@
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
-import { getAllBrewsPrisma } from '../../functions/prisma/brew';
+import { getAllBrewsPrisma } from '../../functions/brew';
 
 const NAMESPACE = 'Brew';
 

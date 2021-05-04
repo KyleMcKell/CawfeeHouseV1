@@ -1,6 +1,6 @@
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
-import { getAllMethodsPrisma } from '../../functions/prisma/method';
+import { getAllMethodsPrisma } from '../../functions/method';
 
 const NAMESPACE = 'Method';
 
