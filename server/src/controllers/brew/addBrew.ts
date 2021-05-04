@@ -1,7 +1,7 @@
 import { Brew } from '@prisma/client';
 import { Request, Response } from 'express';
 import logging from '../../config/logging';
-import createBrew from '../../functions/prisma/brew/createBrew';
+import { createBrewPrisma } from '../../functions/prisma/brew';
 
 const NAMESPACE = 'Brew';
 
@@ -22,7 +22,7 @@ const addBrew = async (req: Request, res: Response) => {
 			about,
 		} = req.body as Brew;
 		if (brewName && ownerId) {
-			const newBrew = await createBrew(
+			const newBrew = await createBrewPrisma(
 				ownerId,
 				coffeeId,
 				methodId,
