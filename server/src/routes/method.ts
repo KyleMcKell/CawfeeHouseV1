@@ -7,4 +7,7 @@ const router = express.Router();
 //$ Adds a coffee to the database
 router.post('/add', extractJWT, controller.addMethod);
 
+//$ Gets all coffees that belong to a user
+router.get('/', extractJWT, controller.getUserMethods);
+
 export = router;

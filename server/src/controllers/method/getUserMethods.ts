@@ -6,15 +6,15 @@ const NAMESPACE = 'Coffee';
 
 const prisma = config.prisma;
 
-const getAllCoffees = async (req: Request, res: Response) => {
+const getUserMethods = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
 		if (ownerId) {
-			const coffees = await prisma.coffee.findMany({
+			const methods = await prisma.method.findMany({
 				where: { ownerId },
 			});
-			res.status(200).json(coffees);
+			res.status(200).json(methods);
 			await prisma.$disconnect();
 		} else {
 			return res.status(403);
@@ -28,4 +28,4 @@ const getAllCoffees = async (req: Request, res: Response) => {
 	}
 };
 
-export default getAllCoffees;
+export default getUserMethods;

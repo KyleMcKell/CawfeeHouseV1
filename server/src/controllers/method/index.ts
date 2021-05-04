@@ -1,3 +1,4 @@
 import addMethod from './addMethod';
+import getUserMethods from './getUserMethods';
 
-export default { addMethod };
+export default { addMethod, getUserMethods };
