@@ -1,7 +1,6 @@
 import config from '../../config/config';
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
-import BrewSearchConstraintType from '../../types/brew/BrewSearchConstraintType';
 
 const NAMESPACE = 'Brew';
 
@@ -11,11 +10,9 @@ const getUserBrews = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
-		const { methodId, coffeeId } = req.body as BrewSearchConstraintType;
-
 		if (ownerId) {
 			const brews = await prisma.brew.findMany({
-				where: { ownerId, methodId, coffeeId },
+				where: { ownerId },
 			});
 
 			res.status(200).json(brews);
@@ -24,6 +21,7 @@ const getUserBrews = async (req: Request, res: Response) => {
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
+
 		return res.status(500).json({
 			message: error.message,
 			error,
