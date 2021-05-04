@@ -4,13 +4,22 @@
 
 **_POST_**: /user/register
 
-Send in JSON containing username, password, and email
+Request must contain:
+{
+username: string,
+email: string,
+password: string
+}
 
 ## Logging in User
 
 **_POST_**: /user/login
 
-Send in JSON containing userLoginID and password
+Request must contain:
+{
+userId: string,
+password: string
+}
 
 **userId**: string containing what the user puts into the sign in field, will be either an email or a username and treated accordingly
 
