@@ -1,11 +1,8 @@
-import config from '../../config/config';
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
-import getAllMethodsPrisma from '../../functions/prisma/method/getAllMethodsPrisma';
+import { getAllMethodsPrisma } from '../../functions/prisma/method';
 
 const NAMESPACE = 'Method';
-
-const prisma = config.prisma;
 
 const getAllMethods = async (req: Request, res: Response) => {
 	try {
