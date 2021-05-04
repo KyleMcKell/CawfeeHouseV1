@@ -32,9 +32,9 @@ const createBrew = async (
 			about,
 		},
 	});
-	async () => {
-		await prisma.$disconnect();
-	};
+
+	await prisma.$disconnect();
+
 	return newBrew;
 };
 

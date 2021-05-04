@@ -14,9 +14,9 @@ const createUser = async (hash: string, username: string, email: string) => {
 			isAdmin: false, //? Default admin to false
 		},
 	});
-	async () => {
-		await prisma.$disconnect();
-	};
+
+	await prisma.$disconnect();
+
 	return newUser;
 };
 
