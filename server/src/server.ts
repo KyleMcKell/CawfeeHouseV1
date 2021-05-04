@@ -52,9 +52,9 @@ app.use((req, res, next) => {
 
 //$ Routes
 app.use('/user', userRoutes); //? User Route, contains Login, Register, Get All, Validate
-app.use('/coffee', coffeeRoutes); //? Coffee Route, contains Add, Get All
-app.use('/method', methodRoutes); //? Method Route, contains Add, Get All
-app.use('/brew', brewRoutes); //? Brew Route, contains Add, Get All
+app.use('/coffee', coffeeRoutes); //? Coffee Route, contains Add, Get User's Coffees
+app.use('/method', methodRoutes); //? Method Route, contains Add, Get User's Methods
+app.use('/brew', brewRoutes); //? Brew Route, contains Add, Get User's Brews
 
 //$ Error Handling
 app.use((req, res, next) => {
