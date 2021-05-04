@@ -11,35 +11,25 @@ const addBrew = async (req: Request, res: Response) => {
 		const {
 			methodId,
 			coffeeId,
-			brewName,
-			ratio,
-			brewTime,
-			waterTemp,
+			name,
 			flavorings,
-			grindSize,
-			ingredients,
-			isFavorite,
+			favorite,
 			about,
 		} = req.body as Brew;
-		if (brewName && ownerId) {
+		if (name && ownerId) {
 			const newBrew = await createBrewPrisma(
 				ownerId,
-				coffeeId,
 				methodId,
-				brewName,
-				ratio,
-				brewTime,
-				waterTemp,
+				coffeeId,
+				name,
 				flavorings,
-				grindSize,
-				ingredients,
-				isFavorite,
+				favorite,
 				about
 			);
 			res.status(201).json(newBrew);
 		} else if (!ownerId) {
 			return res.status(401).json('User not Authorized');
-		} else if (!brewName) {
+		} else if (!name) {
 			return res.status(204).json('Brew Not Provided');
 		}
 	} catch (error) {

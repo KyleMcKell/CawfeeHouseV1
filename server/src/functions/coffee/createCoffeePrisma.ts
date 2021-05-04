@@ -4,19 +4,21 @@ const prisma = config.prisma;
 
 const createCoffeePrisma = async (
 	ownerId: number,
-	coffeeName: string,
+	name: string,
 	brand: string | null,
 	notes: string | null,
-	roastType: string | null,
+	roast: string | null,
+	favorite: boolean | null,
 	about: string | null
 ) => {
 	const newCoffee = await prisma.coffee.create({
 		data: {
 			ownerId,
-			coffeeName,
+			name,
 			brand,
 			notes,
-			roastType,
+			roast,
+			favorite,
 			about,
 		},
 	});

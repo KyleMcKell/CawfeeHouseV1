@@ -8,50 +8,53 @@ datasource db {
 }
 
 model Brew {
-  id          Int     @id @default(autoincrement())
-  ownerId     Int
-  methodId    Int
-  coffeeId    Int
-  brewName    String  @db.VarChar(255)
-  ratio       Int?
-  brewTime    Int?
-  waterTemp   Int?
-  flavorings  String? @db.VarChar(255)
-  grindSize   String? @db.VarChar(255)
-  ingredients String? @db.VarChar(255)
-  isFavorite  Boolean @default(false)
-  about       String?
-  Coffee      Coffee  @relation(fields: [coffeeId], references: [id])
-  Method      Method  @relation(fields: [methodId], references: [id])
-  User        User    @relation(fields: [ownerId], references: [id])
+  id         Int      @id @default(autoincrement())
+  ownerId    Int
+  methodId   Int
+  coffeeId   Int
+  name       String   @db.VarChar(255)
+  flavorings String?  @db.VarChar(255)
+  favorite   Boolean?
+  about      String?
+  Coffee     Coffee   @relation(fields: [coffeeId], references: [id])
+  Method     Method   @relation(fields: [methodId], references: [id])
+  User       User     @relation(fields: [ownerId], references: [id])
 }
 
 model Coffee {
-  id         Int     @id @default(autoincrement())
-  ownerId    Int
-  coffeeName String  @db.VarChar(255)
-  brand      String? @db.VarChar(255)
-  notes      String? @db.VarChar(255)
-  roastType  String? @db.VarChar(255)
-  about      String?
-  User       User    @relation(fields: [ownerId], references: [id])
-  Brew       Brew[]
+  id       Int      @id @default(autoincrement())
+  ownerId  Int
+  name     String   @db.VarChar(255)
+  brand    String?  @db.VarChar(255)
+  notes    String?  @db.VarChar(255)
+  roast    String?  @db.VarChar(255)
+  favorite Boolean?
+  about    String?
+  User     User     @relation(fields: [ownerId], references: [id])
+  Brew     Brew[]
 }
 
 model Method {
-  id         Int     @id @default(autoincrement())
-  ownerId    Int
-  methodName String  @db.VarChar(255)
-  about      String?
-  User       User    @relation(fields: [ownerId], references: [id])
-  Brew       Brew[]
+  id          Int      @id @default(autoincrement())
+  ownerId     Int
+  name        String   @db.VarChar(255)
+  equipment   String?  @db.VarChar(255)
+  ingredients String?  @db.VarChar(255)
+  brewTime    Int?
+  temperature Int?
+  grindSize   String?  @db.VarChar(255)
+  ratio       Int?
+  favorite    Boolean?
+  about       String?
+  User        User     @relation(fields: [ownerId], references: [id])
+  Brew        Brew[]
 }
 
 model User {
   id       Int      @id @default(autoincrement())
   username String   @unique @db.VarChar(255)
   email    String   @unique @db.VarChar(255)
-  isAdmin  Boolean
+  admin    Boolean
   password String   @db.VarChar(255)
   Brew     Brew[]
   Coffee   Coffee[]

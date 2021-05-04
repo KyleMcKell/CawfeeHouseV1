@@ -24,7 +24,7 @@ const signUserJWT = (
 				username: user.username,
 				email: user.email,
 				id: user.id,
-				isAdmin: user.isAdmin,
+				isAdmin: user.admin,
 			},
 			config.server.token.secret,
 			{

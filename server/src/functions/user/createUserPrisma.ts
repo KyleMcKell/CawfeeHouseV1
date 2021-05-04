@@ -9,7 +9,7 @@ const createUser = async (hash: string, username: string, email: string) => {
 			username,
 			email,
 			password: hash,
-			isAdmin: false, //? Default admin to false
+			admin: false, //? Default admin to false
 		},
 	});
 	return newUser;

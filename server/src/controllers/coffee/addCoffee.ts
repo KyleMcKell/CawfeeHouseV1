@@ -8,21 +8,22 @@ const NAMESPACE = 'Coffee';
 const addCoffee = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id; //$ res.locals.jwt set in middleware
-		const { coffeeName, brand, notes, roastType, about } = req.body as Coffee; //$ Request body mirrors Coffee prisma Model
-		if (coffeeName && ownerId) {
+		const { name, brand, notes, roast, favorite, about } = req.body as Coffee; //$ Request body mirrors Coffee prisma Model
+		if (name && ownerId) {
 			const newCoffee = await createCoffeePrisma(
 				ownerId,
-				coffeeName,
+				name,
 				brand,
 				notes,
-				roastType,
+				roast,
+				favorite,
 				about
 			);
 			return res.status(201).json(newCoffee);
 		} else if (!ownerId) {
 			//$ If owner doesn't exist, user wasn't authorized or isn't logged in, or session has expired
 			return res.status(401).json('User not Authorized');
-		} else if (!coffeeName) {
+		} else if (!name) {
 			//$ If Coffee Name isn't provided, cannot create coffee
 			return res.status(204).json('Coffee Not Provided');
 		}

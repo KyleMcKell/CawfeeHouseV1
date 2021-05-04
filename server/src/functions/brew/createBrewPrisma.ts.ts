@@ -4,33 +4,21 @@ const prisma = config.prisma;
 
 const createBrewPrisma = async (
 	ownerId: number,
-	coffeeId: number,
 	methodId: number,
-	brewName: string,
-	ratio: number | null,
-	brewTime: number | null,
-	waterTemp: number | null,
+	coffeeId: number,
+	name: string,
 	flavorings: string | null,
-	grindSize: string | null,
-	ingredients: string | null,
-	isFavorite: boolean | undefined,
+	favorite: boolean | null,
 	about: string | null
 ) => {
-	console.log(`Method Id: ${methodId}`);
-	console.log(`Coffee Id: ${coffeeId}`);
 	const newBrew = await prisma.brew.create({
 		data: {
 			ownerId,
-			coffeeId,
 			methodId,
-			brewName,
-			ratio,
-			brewTime,
-			waterTemp,
+			coffeeId,
+			name,
 			flavorings,
-			grindSize,
-			ingredients,
-			isFavorite,
+			favorite,
 			about,
 		},
 	});

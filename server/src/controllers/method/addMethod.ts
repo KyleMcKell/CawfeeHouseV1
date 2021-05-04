@@ -8,14 +8,35 @@ const NAMESPACE = 'Method';
 const addMethod = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id; //$ res.locals.jwt set in middleware
-		const { methodName, about } = req.body as Method; //$ Request body mirrors Method prisma Model
-		if (methodName && ownerId) {
-			const newMethod = await createMethodPrisma(ownerId, methodName, about);
+		const {
+			name,
+			equipment,
+			ingredients,
+			brewTime,
+			temperature,
+			grindSize,
+			ratio,
+			favorite,
+			about,
+		} = req.body as Method; //$ Request body mirrors Method prisma Model
+		if (name && ownerId) {
+			const newMethod = await createMethodPrisma(
+				ownerId,
+				name,
+				equipment,
+				ingredients,
+				brewTime,
+				temperature,
+				grindSize,
+				ratio,
+				favorite,
+				about
+			);
 			return res.status(201).json(newMethod);
 		} else if (!ownerId) {
 			//$ If JWT doesn't control ownerId, user isn't auth'd
 			return res.status(401).json('User not Authorized');
-		} else if (!methodName) {
+		} else if (!name) {
 			//$ If Method Name isn't provided, cannot create method
 			return res.status(204).json('Method Not Provided');
 		}
