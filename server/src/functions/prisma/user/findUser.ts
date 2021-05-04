@@ -46,6 +46,10 @@ const findUser = async (userId: string) => {
 			return null;
 	}
 
+	async () => {
+		await prisma.$disconnect();
+	};
+
 	return user;
 };
 
