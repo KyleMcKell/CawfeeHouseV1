@@ -53,4 +53,4 @@ Get all brews that belong to a user
 
 **_GET_**: /brew/:id
 
-Get a brew from its id
+Get a brew from its id, passed as req.params

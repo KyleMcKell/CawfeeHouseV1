@@ -30,3 +30,9 @@ about?: String = Info on how to do the method
 **_GET_**: /method
 
 Get all methods that belong to a user
+
+## Get method from Id
+
+**_GET_**: /method/:id
+
+Get a method from its id, passed as req.params

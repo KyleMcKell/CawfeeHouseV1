@@ -10,4 +10,7 @@ router.post('/add', extractJWT, controller.addCoffee);
 //$ Gets all coffees that belong to a user
 router.get('/', extractJWT, controller.getAllCoffees);
 
+//$ Gets a coffee that belongs to the user
+router.get('/:id', extractJWT, controller.getCoffee);
+
 export = router;
