@@ -22,8 +22,8 @@ const findLoginParameter = (userId: string) => {
 };
 
 //$ finds the user with either their email or their username
-const findUser = async (userLoginID: string) => {
-	const fetchParameter = findLoginParameter(userLoginID);
+const findUser = async (userId: string) => {
+	const fetchParameter = findLoginParameter(userId);
 
 	let user;
 
@@ -31,7 +31,7 @@ const findUser = async (userLoginID: string) => {
 		case 'email':
 			user = await prisma.user.findUnique({
 				where: {
-					email: userLoginID,
+					email: userId,
 				},
 			});
 			break;
@@ -39,7 +39,7 @@ const findUser = async (userLoginID: string) => {
 		case 'username':
 			user = await prisma.user.findUnique({
 				where: {
-					username: userLoginID,
+					username: userId,
 				},
 			});
 			break;
