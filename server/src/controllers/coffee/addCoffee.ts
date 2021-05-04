@@ -1,7 +1,7 @@
 import { Coffee } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
-import logging from '../config/logging';
-import createCoffee from '../functions/prisma/coffee/createCoffee';
+import logging from '../../config/logging';
+import createCoffee from '../../functions/coffee/createCoffee';
 
 const NAMESPACE = 'Coffee';
 
@@ -35,4 +35,4 @@ const addCoffee = (req: Request, res: Response) => {
 	}
 };
 
-export default { addCoffee };
+export default addCoffee;

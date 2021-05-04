@@ -1,7 +1,7 @@
 import { Method } from '@prisma/client';
 import { Request, Response } from 'express';
-import logging from '../config/logging';
-import createMethod from '../functions/prisma/method/createMethod';
+import logging from '../../config/logging';
+import createMethod from '../../functions/method/createMethod';
 
 const NAMESPACE = 'Method';
 
@@ -28,4 +28,4 @@ const addMethod = (req: Request, res: Response) => {
 	}
 };
 
-export default { addMethod };
+export default addMethod;
