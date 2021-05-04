@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
-import createCoffee from '../functions/prisma/coffee/createCoffee';
+import createCoffee from '../functions/prisma/method/createMethod';
 
-const NAMESPACE = 'Coffee';
+const NAMESPACE = 'Method';
 
-const addCoffee = (req: Request, res: Response, next: NextFunction) => {
+const addMethod = (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 		const { coffeeName, brand, notes, roastType, about } = req.body;
@@ -32,4 +32,4 @@ const addCoffee = (req: Request, res: Response, next: NextFunction) => {
 	}
 };
 
-export default { addCoffee };
+export default { addMethod };
