@@ -4,6 +4,7 @@ import config from './config/config';
 import userRoutes from './routes/user';
 import coffeeRoutes from './routes/coffee';
 import methodRoutes from './routes/method';
+import brewRoutes from './routes/brew';
 import cors from 'cors';
 
 const NAMESPACE = 'Server';
@@ -53,6 +54,7 @@ app.use((req, res, next) => {
 app.use('/user', userRoutes); //? User Route, contains Login, Register, Get All, Validate
 app.use('/coffee', coffeeRoutes); //? Coffee Route, contains Add
 app.use('/method', methodRoutes); //? Method Route, contains Add
+app.use('/brew', brewRoutes); //? Brew Route, contains Add
 
 //$ Error Handling
 app.use((req, res, next) => {

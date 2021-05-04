@@ -1,11 +1,9 @@
 import config from '../../../config/config';
 import logging from '../../../config/logging';
+import UserIdType from '../../../types/user/UserIdType';
 
 const prisma = config.prisma;
 const NAMESPACE = 'User';
-
-//$ Defines the user Fetch Parameter for logging in
-type UserIdType = 'email' | 'username';
 
 const findLoginParameter = (userId: string) => {
 	let fetchParameter: UserIdType; //$ Set a fetchParameter to tell if the userLoginID provided was an email or a username

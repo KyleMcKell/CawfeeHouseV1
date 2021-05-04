@@ -5,6 +5,8 @@ import signJWT from '../functions/jwt/signJWT';
 import config from '../config/config';
 import createUser from '../functions/prisma/user/createUser';
 import findUser from '../functions/prisma/user/findUser';
+import { User } from '@prisma/client';
+import UserLoginType from '../types/user/UserLoginType';
 
 const prisma = config.prisma;
 
@@ -22,7 +24,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 
 //$ Create a new user and store in DB
 const register = (req: Request, res: Response, next: NextFunction) => {
-	let { username, email, password } = req.body;
+	let { username, email, password } = req.body as User;
 
 	bcryptjs.hash(password, 10, async (hashError, hash) => {
 		if (hashError) {
@@ -47,7 +49,7 @@ const register = (req: Request, res: Response, next: NextFunction) => {
 
 //$ Login user and return token and user object
 const login = async (req: Request, res: Response, next: NextFunction) => {
-	const { userId, password } = req.body;
+	const { userId, password } = req.body as UserLoginType;
 
 	try {
 		const user = await findUser(userId);

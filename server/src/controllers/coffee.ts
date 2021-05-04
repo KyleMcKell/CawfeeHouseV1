@@ -1,3 +1,4 @@
+import { Coffee } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
 import createCoffee from '../functions/prisma/coffee/createCoffee';
@@ -7,7 +8,7 @@ const NAMESPACE = 'Coffee';
 const addCoffee = (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
-		const { coffeeName, brand, notes, roastType, about } = req.body;
+		const { coffeeName, brand, notes, roastType, about } = req.body as Coffee;
 		if (coffeeName && ownerId) {
 			const newCoffee = createCoffee(
 				ownerId,
