@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 import { Response } from 'express';
-import config from '../../../config/config';
+import config from '../../config/config';
 
 const prisma = config.prisma;
 
