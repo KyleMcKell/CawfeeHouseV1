@@ -18,7 +18,7 @@ const registerUser = (req: Request, res: Response) => {
 		}
 		try {
 			//$ Creates new user then responds with json the user
-			const newUser = createUserPrisma(hash, username, email);
+			const newUser = await createUserPrisma(hash, username, email);
 			res.status(201).json(newUser);
 		} catch (error) {
 			//$ If failure, respond with a 500 server error

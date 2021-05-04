@@ -13,4 +13,7 @@ router.get('/', extractJWT, controller.getAllBrews);
 //$ Gets a brew that belongs to the user
 router.get('/:id', extractJWT, controller.getBrew);
 
+// //$ Updates a brew that belongs to the user
+// router.put('/:id', extractJWT, controller.updateBrew);
+
 export = router;
