@@ -36,3 +36,9 @@ notes?: String = Flavor notes of coffee
 roastType?: String = Roast Type of coffee
 
 about?: String = Any additional info about coffee
+
+## Get all coffees
+
+**_GET_**: /coffee
+
+Get all coffees that belong to a user
