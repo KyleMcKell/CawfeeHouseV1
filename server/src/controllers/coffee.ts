@@ -19,12 +19,10 @@ const addCoffee = (req: Request, res: Response, next: NextFunction) => {
 				about
 			);
 			return res.status(201).json(newCoffee);
-		} else if (!coffeeName) {
-			return res.status(204).json('Coffee Not Provided');
 		} else if (!ownerId) {
 			return res.status(401).json('User not Authorized');
-		} else {
-			return res.status(204);
+		} else if (!coffeeName) {
+			return res.status(204).json('Coffee Not Provided');
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
