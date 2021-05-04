@@ -5,7 +5,7 @@ import createBrew from '../../functions/brew/createBrew';
 
 const NAMESPACE = 'Brew';
 
-const addBrew = (req: Request, res: Response) => {
+const addBrew = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 		const {
@@ -22,10 +22,10 @@ const addBrew = (req: Request, res: Response) => {
 			about,
 		} = req.body as Brew;
 		if (brewName && ownerId) {
-			const newBrew = createBrew(
+			const newBrew = await createBrew(
 				ownerId,
-				methodId,
 				coffeeId,
+				methodId,
 				brewName,
 				ratio,
 				brewTime,

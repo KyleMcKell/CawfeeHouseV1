@@ -20,9 +20,7 @@ const createCoffee = async (
 			about,
 		},
 	});
-	async () => {
-		await prisma.$disconnect();
-	};
+
 	return newCoffee;
 };
 

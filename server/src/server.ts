@@ -52,12 +52,12 @@ app.use((req, res, next) => {
 
 //$ Routes
 app.use('/user', userRoutes); //? User Route, contains Login, Register, Get All, Validate
-app.use('/coffee', coffeeRoutes); //? Coffee Route, contains Add
-app.use('/method', methodRoutes); //? Method Route, contains Add
-app.use('/brew', brewRoutes); //? Brew Route, contains Add
+app.use('/coffee', coffeeRoutes); //? Coffee Route, contains Add, Get User's Coffees
+app.use('/method', methodRoutes); //? Method Route, contains Add, Get User's Methods
+app.use('/brew', brewRoutes); //? Brew Route, contains Add, Get User's Brews
 
 //$ Error Handling
-app.use((req, res, next) => {
+app.use((req, res) => {
 	const error = new Error('not found');
 
 	return res.status(404).json({
