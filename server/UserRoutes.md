@@ -4,7 +4,7 @@
 
 **_POST_**: /user/register
 
-Request must contain:
+Request must contain, and sends to Database JSON containing:
 {
 username: string,
 email: string,

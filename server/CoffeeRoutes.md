@@ -15,7 +15,7 @@ roastType: string | null,
 about: string | null
 }
 
-Sends JSON containing:
+Sends JSON to Database containing:
 {
 ownerId,
 coffeeName,
