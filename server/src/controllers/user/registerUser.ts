@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import logging from '../../config/logging';
 import bcryptjs from 'bcryptjs';
 import { User } from '@prisma/client';
-import createUser from '../../functions/user/createUser';
+import createUser from '../../functions/prisma/user/createUser';
 
 const NAMESPACE = 'User';
 

@@ -1,7 +1,7 @@
 import config from '../../config/config';
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
-import getAllMethodsPrisma from '../../functions/method/getAllMethodsPrisma';
+import getAllMethodsPrisma from '../../functions/prisma/method/getAllMethodsPrisma';
 
 const NAMESPACE = 'Method';
 

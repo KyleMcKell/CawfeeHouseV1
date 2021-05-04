@@ -1,8 +1,8 @@
 import UserLoginType from '../../types/user/UserLoginType';
-import findUser from '../../functions/user/findUser';
+import findUser from '../../functions/prisma/user/findUser';
 import { Request, Response } from 'express';
 import bcryptjs from 'bcryptjs';
-import signUserJWT from '../../functions/user/signUserJWT';
+import signUserJWT from '../../functions/signUserJWT';
 import logging from '../../config/logging';
 
 const NAMESPACE = 'User';
