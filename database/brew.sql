@@ -4,22 +4,17 @@ CREATE TABLE "Brew"(
   "ownerId" INT NOT NULL,
   "methodId" INT NOT NULL,
   "coffeeId" INT NOT NULL,
-  "brewName" VARCHAR(255) NOT NULL,
-  ratio INT,
-  "brewTime" INT,
-  "waterTemp" INT,
+  name VARCHAR(255) NOT NULL,
   flavorings VARCHAR(255),
-  "grindSize" VARCHAR(255),
-  ingredients VARCHAR(255),
-  "isFavorite" BOOLEAN DEFAULT FALSE NOT NULL ,
-  about text,
+  favorite BOOLEAN,
+  about TEXT,
   FOREIGN KEY ("ownerId") REFERENCES "User"(id),
   FOREIGN KEY ("methodId") REFERENCES "Method"(id),
   FOREIGN KEY ("coffeeId") REFERENCES "Coffee"(id)
 );
 
 -- @block
-CREATE INDEX "brewIndex" ON "Brew"("brewName")
+CREATE INDEX "brewIndex" ON "Brew"(name);
 
 -- @block
 SELECT * FROM "Brew";
