@@ -2,7 +2,7 @@ import config from '../../config/config';
 
 const prisma = config.prisma;
 
-const createBrew = async (
+const createBrewPrisma = async (
 	ownerId: number,
 	coffeeId: number,
 	methodId: number,
@@ -38,4 +38,4 @@ const createBrew = async (
 	return newBrew;
 };
 
-export default createBrew;
+export default createBrewPrisma;

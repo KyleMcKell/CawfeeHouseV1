@@ -1,8 +1,7 @@
 import UserLoginType from '../../types/user/UserLoginType';
-import findUser from '../../functions/user/findUser';
+import { getUserPrisma, signUserJWT } from '../../functions/user';
 import { Request, Response } from 'express';
 import bcryptjs from 'bcryptjs';
-import signUserJWT from '../../functions/user/signUserJWT';
 import logging from '../../config/logging';
 
 const NAMESPACE = 'User';
@@ -12,7 +11,7 @@ const loginUser = async (req: Request, res: Response) => {
 	const { userId, password } = req.body as UserLoginType;
 
 	try {
-		const user = await findUser(userId);
+		const user = await getUserPrisma(userId);
 		if (!user) {
 			return res.status(404).json(`User "${userId}" not found`);
 		}

@@ -1,10 +1,8 @@
-import config from '../../config/config';
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
+import { getBrewPrisma } from '../../functions/brew';
 
 const NAMESPACE = 'Brew';
-
-const prisma = config.prisma;
 
 const getBrew = async (req: Request, res: Response) => {
 	try {
@@ -13,9 +11,7 @@ const getBrew = async (req: Request, res: Response) => {
 		const { id } = req.params;
 
 		if (ownerId) {
-			const brew = await prisma.brew.findFirst({
-				where: { id: parseInt(id), ownerId },
-			});
+			const brew = await getBrewPrisma(ownerId, parseInt(id));
 
 			res.status(200).json(brew);
 		} else {
