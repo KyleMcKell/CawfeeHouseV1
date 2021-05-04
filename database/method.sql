@@ -12,3 +12,6 @@ CREATE INDEX "methodIndex" ON "Method"("methodName");
 
 -- @block
 SELECT * FROM "Method";
+
+-- @block
+DROP TABLE "Method";

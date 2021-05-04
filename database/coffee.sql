@@ -15,3 +15,6 @@ CREATE INDEX "coffeeIndex" ON "Coffee"("coffeeName")
 
 -- @block
 SELECT * FROM "Coffee";
+
+-- @block
+DROP TABLE "Coffee";
