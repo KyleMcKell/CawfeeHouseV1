@@ -10,7 +10,7 @@ const getCoffee = async (req: Request, res: Response) => {
 
 		const { id } = req.params;
 
-		if (ownerId && id) {
+		if (ownerId) {
 			const coffee = await getCoffeePrisma(ownerId, parseInt(id));
 
 			if (!coffee) {

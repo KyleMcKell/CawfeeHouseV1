@@ -1,10 +1,10 @@
 import logging from '../../config/logging';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { getAllCoffeesPrisma } from '../../functions/coffee';
 
 const NAMESPACE = 'Coffee';
 
-const getAllCoffees = async (res: Response) => {
+const getAllCoffees = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
@@ -16,7 +16,6 @@ const getAllCoffees = async (res: Response) => {
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
-
 		return res.status(500).json({
 			message: error.message,
 			error,

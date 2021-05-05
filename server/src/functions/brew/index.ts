@@ -1,4 +1,4 @@
-import createBrewPrisma from './createBrewPrisma.ts';
+import createBrewPrisma from './createBrewPrisma';
 import getAllBrewsPrisma from './getAllBrewsPrisma';
 import getBrewPrisma from './getBrewPrisma';
 

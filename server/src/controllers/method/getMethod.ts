@@ -8,9 +8,9 @@ const getMethod = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
-		const { id } = req.params!;
+		const { id } = req.params;
 
-		if (ownerId && id) {
+		if (ownerId) {
 			const method = await getMethodPrisma(ownerId, parseInt(id));
 
 			if (!method) {

@@ -1,10 +1,10 @@
 import logging from '../../config/logging';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { getAllMethodsPrisma } from '../../functions/method';
 
 const NAMESPACE = 'Method';
 
-const getAllMethods = async (res: Response) => {
+const getAllMethods = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 

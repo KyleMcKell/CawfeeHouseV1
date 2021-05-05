@@ -1,10 +1,10 @@
 import logging from '../../config/logging';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { getAllBrewsPrisma } from '../../functions/brew';
 
 const NAMESPACE = 'Brew';
 
-const getAllBrews = async (res: Response) => {
+const getAllBrews = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 

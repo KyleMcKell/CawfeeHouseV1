@@ -10,7 +10,7 @@ const getBrew = async (req: Request, res: Response) => {
 
 		const { id } = req.params;
 
-		if (ownerId && id) {
+		if (ownerId) {
 			const brew = await getBrewPrisma(ownerId, parseInt(id));
 			if (!brew) {
 				res.status(404).json({ message: 'Brew not found' });

@@ -34,14 +34,10 @@ const loginUser = async (req: Request, res: Response) => {
 							message: 'Auth Successful',
 							token,
 						});
-					} else {
-						return res.status(500).json({ message: 'Internal Error' });
 					}
 				});
 			}
-			return res.status(500).json({ message: 'Internal Error' });
 		});
-		return res.status(500).json({ message: 'Internal Error' });
 	} catch (error) {
 		logging.error(NAMESPACE, error.message, error);
 
