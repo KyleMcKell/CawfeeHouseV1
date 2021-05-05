@@ -6,20 +6,26 @@ const NAMESPACE = 'User';
 
 //$ Return all users in database without passwords
 const getAllUsers = async (req: Request, res: Response) => {
-	try {
-		const users = await getAllUsersPrisma();
+	const admin: boolean = res.locals.jwt.admin; //$ res.locals.jwt set in middleware
 
-		return res.status(200).json({
-			users: users,
-			count: users.length,
-		});
-	} catch (error) {
-		logging.error(NAMESPACE, error.message, error);
+	if (admin) {
+		try {
+			const users = await getAllUsersPrisma();
 
-		return res.status(500).json({
-			message: error.message,
-			error,
-		});
+			return res.status(200).json({
+				users: users,
+				count: users.length,
+			});
+		} catch (error) {
+			logging.error(NAMESPACE, error.message, error);
+
+			return res.status(500).json({
+				message: error.message,
+				error,
+			});
+		}
+	} else {
+		res.status(401).json({ message: 'Not Authorized' });
 	}
 };
 
