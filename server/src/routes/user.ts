@@ -15,8 +15,6 @@ router.post('/register', controller.registerUser);
 router.post('/login', controller.loginUser);
 
 //$ Protected route to get all users
-router.get('/', extractJWT, controller.getAllUsers);
-
-//$
+router.get('/', controller.getAllUsers);
 
 export = router;
