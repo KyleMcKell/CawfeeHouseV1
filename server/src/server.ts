@@ -1,4 +1,4 @@
-import express, { Response } from 'express';
+import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
 import userRoutes from './routes/user';
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 		);
 	});
 
-	return next();
+	next();
 });
 
 //$ Parse Requests
@@ -44,10 +44,10 @@ app.use((req, res, next) => {
 
 	if (req.method == 'OPTIONS') {
 		res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
-		return res.status(200).json({ message: '' });
+		return res.status(200).json({});
 	}
 
-	return next();
+	next();
 });
 
 //$ Routes
@@ -57,7 +57,7 @@ app.use('/method', methodRoutes); //? Method Route, contains Add, Get User's Met
 app.use('/brew', brewRoutes); //? Brew Route, contains Add, Get User's Brews
 
 //$ Error Handling
-app.use((res: Response) => {
+app.use((req, res) => {
 	const error = new Error('not found');
 
 	return res.status(404).json({
