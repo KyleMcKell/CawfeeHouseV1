@@ -10,7 +10,7 @@ const getAllCoffees = async (req: Request, res: Response) => {
 
 		if (ownerId) {
 			const coffees = await getAllCoffeesPrisma(ownerId);
-			res.status(200).json(coffees);
+			return res.status(200).json(coffees);
 		} else {
 			return res.status(403);
 		}

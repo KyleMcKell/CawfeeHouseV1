@@ -8,14 +8,18 @@ const getMethod = async (req: Request, res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
-		const { id } = req.params;
+		const { id } = req.params!;
 
-		if (ownerId) {
+		if (ownerId && id) {
 			const method = await getMethodPrisma(ownerId, parseInt(id));
 
-			res.status(200).json(method);
+			return res.status(200).json({ method });
+		} else if (!ownerId) {
+			return res.status(401);
+		} else if (!id) {
+			return res.status(400);
 		} else {
-			return res.status(403);
+			return res.status(500);
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

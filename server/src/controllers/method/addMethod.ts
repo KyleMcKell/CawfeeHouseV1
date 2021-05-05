@@ -39,6 +39,8 @@ const addMethod = async (req: Request, res: Response) => {
 		} else if (!name) {
 			//$ If Method Name isn't provided, cannot create method
 			return res.status(204).json('Method Not Provided');
+		} else {
+			return res.status(500);
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

@@ -10,10 +10,10 @@ const getCoffee = async (req: Request, res: Response) => {
 
 		const { id } = req.params;
 
-		if (ownerId) {
+		if (ownerId && id) {
 			const coffee = await getCoffeePrisma(ownerId, parseInt(id));
 
-			res.status(200).json(coffee);
+			return res.status(200).json(coffee);
 		} else {
 			return res.status(403);
 		}
