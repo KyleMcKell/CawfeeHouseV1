@@ -13,9 +13,9 @@ const getMethod = async (req: Request, res: Response) => {
 		if (ownerId) {
 			const method = await getMethodPrisma(ownerId, parseInt(id));
 
-			res.status(200).json(method);
+			res.status(200).json({ message: method });
 		} else {
-			return res.status(403);
+			return res.status(403).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

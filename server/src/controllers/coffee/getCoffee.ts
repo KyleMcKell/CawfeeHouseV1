@@ -13,9 +13,9 @@ const getCoffee = async (req: Request, res: Response) => {
 		if (ownerId) {
 			const coffee = await getCoffeePrisma(ownerId, parseInt(id));
 
-			res.status(200).json(coffee);
+			res.status(200).json({ message: coffee });
 		} else {
-			return res.status(403);
+			return res.status(403).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

@@ -13,7 +13,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 			const users = await getAllUsersPrisma();
 
 			return res.status(200).json({
-				users: users,
+				message: users,
 				count: users.length,
 			});
 		} catch (error) {
@@ -25,7 +25,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 			});
 		}
 	} else {
-		res.status(401).json({ message: 'Not Authorized' });
+		res.status(401).json({ message: 'Unauthorized' });
 	}
 };
 

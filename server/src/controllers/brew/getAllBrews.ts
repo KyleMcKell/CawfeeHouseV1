@@ -11,9 +11,9 @@ const getAllBrews = async (req: Request, res: Response) => {
 		if (ownerId) {
 			const brews = await getAllBrewsPrisma(ownerId);
 
-			res.status(200).json(brews);
+			res.status(200).json({ message: brews });
 		} else {
-			return res.status(403);
+			return res.status(403).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
