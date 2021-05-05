@@ -13,7 +13,7 @@ const loginUser = async (req: Request, res: Response) => {
 	try {
 		const user = await getUserPrisma(userId);
 		if (!user) {
-			return res.status(404).json(`User "${userId}" not found`);
+			return res.status(404).json({ message: `User "${userId}" not found` });
 		}
 		//$ Compare password with bcrypt hash
 		bcryptjs.compare(password, user.password, (error, result) => {
@@ -34,10 +34,14 @@ const loginUser = async (req: Request, res: Response) => {
 							message: 'Auth Successful',
 							token,
 						});
+					} else {
+						return res.status(500).json({ message: 'Internal Error' });
 					}
 				});
 			}
+			return res.status(500).json({ message: 'Internal Error' });
 		});
+		return res.status(500).json({ message: 'Internal Error' });
 	} catch (error) {
 		logging.error(NAMESPACE, error.message, error);
 

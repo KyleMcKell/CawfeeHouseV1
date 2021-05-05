@@ -19,7 +19,7 @@ const getBrew = async (req: Request, res: Response) => {
 		} else if (!id) {
 			return res.status(400).json({ message: 'Brew Id Not Provided' });
 		} else {
-			return res.status(403);
+			return res.status(500).json({ message: 'Internal Error' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
