@@ -26,13 +26,11 @@ const addBrew = async (req: Request, res: Response) => {
 				favorite,
 				about
 			);
-			return res.status(201).json({ message: 'Brew Created', newBrew });
+			res.status(201).json({ message: 'Brew Created', newBrew });
 		} else if (!ownerId) {
 			return res.status(401).json({ message: 'Unauthorized' });
 		} else if (!name) {
 			return res.status(204).json({ message: 'Brew Not Provided' });
-		} else {
-			return res.status(500).json({ message: 'Internal Error' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

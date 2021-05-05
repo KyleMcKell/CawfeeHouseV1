@@ -13,13 +13,9 @@ const getMethod = async (req: Request, res: Response) => {
 		if (ownerId && id) {
 			const method = await getMethodPrisma(ownerId, parseInt(id));
 
-			return res.status(200).json({ message: method });
-		} else if (!ownerId) {
-			return res.status(401).json({ message: 'Unauthorized' });
-		} else if (!id) {
-			return res.status(400).json({ message: 'Method Id Not Provided' });
+			res.status(200).json({ message: method });
 		} else {
-			return res.status(500).json({ message: 'Internal Error' });
+			return res.status(403).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

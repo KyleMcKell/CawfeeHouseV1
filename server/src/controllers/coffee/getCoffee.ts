@@ -13,13 +13,9 @@ const getCoffee = async (req: Request, res: Response) => {
 		if (ownerId && id) {
 			const coffee = await getCoffeePrisma(ownerId, parseInt(id));
 
-			return res.status(200).json({ message: coffee });
-		} else if (!ownerId) {
-			return res.status(401).json({ message: 'Unauthorized' });
-		} else if (!id) {
-			return res.status(400).json({ message: 'Coffee Id Not Provided' });
+			res.status(200).json({ message: coffee });
 		} else {
-			return res.status(500).json({ message: 'Internal Error' });
+			return res.status(403).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

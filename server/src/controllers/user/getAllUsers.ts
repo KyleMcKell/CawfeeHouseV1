@@ -14,6 +14,7 @@ const getAllUsers = async (res: Response) => {
 
 			return res.status(200).json({
 				message: users,
+				count: users.length,
 			});
 		} catch (error) {
 			logging.error(NAMESPACE, error.message, error);
@@ -24,7 +25,7 @@ const getAllUsers = async (res: Response) => {
 			});
 		}
 	} else {
-		return res.status(401).json({ message: 'Unauthorized' });
+		res.status(401).json({ message: 'Unauthorized' });
 	}
 };
 

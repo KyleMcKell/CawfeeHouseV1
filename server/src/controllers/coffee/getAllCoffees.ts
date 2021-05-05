@@ -10,9 +10,9 @@ const getAllCoffees = async (res: Response) => {
 
 		if (ownerId) {
 			const coffees = await getAllCoffeesPrisma(ownerId);
-			return res.status(200).json({ message: coffees });
+			res.status(200).json({ message: coffees });
 		} else {
-			return res.status(401).json({ message: 'Unauthorized' });
+			return res.status(403).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

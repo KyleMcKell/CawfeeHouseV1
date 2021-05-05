@@ -19,13 +19,13 @@ const addCoffee = async (req: Request, res: Response) => {
 				favorite,
 				about
 			);
-			return res.status(201).json({ message: 'Coffee Created', newCoffee });
+			return res.status(201).json({ message: newCoffee });
 		} else if (!ownerId) {
+			//$ If owner doesn't exist, user wasn't authorized or isn't logged in, or session has expired
 			return res.status(401).json({ message: 'Unauthorized' });
 		} else if (!name) {
-			return res.status(204).json({ message: 'Brew Not Provided' });
-		} else {
-			return res.status(500).json({ message: 'Internal Error' });
+			//$ If Coffee Name isn't provided, cannot create coffee
+			return res.status(204).json({ message: 'Coffee Not Provided' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
