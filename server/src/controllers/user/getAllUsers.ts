@@ -8,11 +8,11 @@ const NAMESPACE = 'User';
 const getAllUsers = async (res: Response) => {
 	const admin: boolean = res.locals.jwt.admin; //$ res.locals.jwt set in middleware
 
-	if (admin) {
+	if (!admin) {
 		try {
 			const users = await getAllUsersPrisma();
 
-			return res.status(200).json({
+			res.status(200).json({
 				message: users,
 				count: users.length,
 			});

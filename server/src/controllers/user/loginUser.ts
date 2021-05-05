@@ -18,19 +18,19 @@ const loginUser = async (req: Request, res: Response) => {
 		//$ Compare password with bcrypt hash
 		bcryptjs.compare(password, user.password, (error, result) => {
 			if (error) {
-				return res.status(401).json({
+				res.status(401).json({
 					message: 'Password Mismatch',
 				});
 			} else if (result) {
 				//$ Sign a JWT to user if password matches
 				signUserJWT(user, (error, token) => {
 					if (error) {
-						return res.status(401).json({
+						res.status(401).json({
 							message: 'Unable to Sign JWT',
 							error,
 						});
 					} else if (token) {
-						return res.status(200).json({
+						res.status(200).json({
 							message: 'Auth Successful',
 							token,
 						});

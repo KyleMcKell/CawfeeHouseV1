@@ -13,7 +13,7 @@ const getAllBrews = async (res: Response) => {
 
 			res.status(200).json({ message: brews });
 		} else {
-			return res.status(403).json({ message: 'Unauthorized' });
+			res.status(403).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
