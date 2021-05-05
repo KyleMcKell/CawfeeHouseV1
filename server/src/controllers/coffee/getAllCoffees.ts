@@ -1,21 +1,22 @@
 import logging from '../../config/logging';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { getAllCoffeesPrisma } from '../../functions/coffee';
 
 const NAMESPACE = 'Coffee';
 
-const getAllCoffees = async (req: Request, res: Response) => {
+const getAllCoffees = async (res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
 		if (ownerId) {
 			const coffees = await getAllCoffeesPrisma(ownerId);
-			return res.status(200).json(coffees);
+			return res.status(200).json({ message: coffees });
 		} else {
-			return res.status(403);
+			return res.status(401).json({ message: 'Unauthorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
+
 		return res.status(500).json({
 			message: error.message,
 			error,
