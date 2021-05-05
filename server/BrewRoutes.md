@@ -1,6 +1,6 @@
 # Method Routes for CawfeeHouse
 
-## Add a Method
+## Add a Brew
 
 **_POST_**: /brew/add
 
@@ -8,16 +8,11 @@ Adds a brew to the database.
 
 Request body must contain:
 {
-coffeeId: number,
 methodId: number,
-brewName: string,
-ratio: number | null,
-brewTime: number | null,
-waterTemp: number | null,
+coffeeId: number,
+name: string,
 flavorings: string | null,
-grindSize: string | null,
-ingredients: string | null,
-isFavorite: boolean | undefined,
+favorite: boolean | null,
 about: string | null
 }
 
@@ -26,22 +21,11 @@ Sends JSON to Database containing:
 ownerId,
 methodId,
 coffeeId,
-brewName,
-ratio,
-brewTime,
-waterTemp,
+name,
 flavorings,
-grindSize,
-ingredients,
-isFavorite,
+favorite,
 about,
 }
-
-ownerId: Int = Id of user who added method
-
-methodName: String = Name given to method by user
-
-about?: String = Info on how to do the method
 
 ## Get all brews
 

@@ -8,7 +8,8 @@ Request must contain, and sends to Database JSON containing:
 {
 username: string,
 email: string,
-password: string
+password: string,
+admin: boolean | null
 }
 
 ## Logging in User

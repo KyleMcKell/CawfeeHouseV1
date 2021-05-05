@@ -8,22 +8,30 @@ Adds a method to the database.
 
 Request body must contain:
 {
-methodName: string,
+name: string,
+equipment: string | null,
+ingredients: string | null,
+brewTime: number | null,
+temperature: number | null,
+grindSize: string | null,
+ratio: number | null,
+favorite: boolean | null,
 about: string | null
 }
 
 Sends JSON to Database containing:
 {
 ownerId,
-methodName,
-about,
+name,
+equipment,
+ingredients,
+brewTime,
+temperature,
+grindSize,
+ratio,
+favorite,
+about
 }
-
-ownerId: Int = Id of user who added method
-
-methodName: String = Name given to method by user
-
-about?: String = Info on how to do the method
 
 ## Get user methods
 

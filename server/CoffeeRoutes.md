@@ -8,34 +8,24 @@ Adds a coffee to the database.
 
 Request body must contain:
 {
-coffeeName: string,
+name: string,
 brand: string | null,
 notes: string | null,
-roastType: string | null,
+roast: string | null,
+favorite: boolean | null,
 about: string | null
 }
 
 Sends JSON to Database containing:
 {
 ownerId,
-coffeeName,
+name,
 brand,
 notes,
-roastType,
+roast,
+favorite,
 about,
 }
-
-ownerId: Int = Id of user who added coffee
-
-coffeeName: String = Name given to coffee by user
-
-brand?: String = Brand of coffee
-
-notes?: String = Flavor notes of coffee
-
-roastType?: String = Roast Type of coffee
-
-about?: String = Any additional info about coffee
 
 ## Get user coffees
 
