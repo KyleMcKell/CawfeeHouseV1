@@ -1,19 +1,19 @@
 import logging from '../../config/logging';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { getAllBrewsPrisma } from '../../functions/brew';
 
 const NAMESPACE = 'Brew';
 
-const getAllBrews = async (req: Request, res: Response) => {
+const getAllBrews = async (res: Response) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
 
 		if (ownerId) {
 			const brews = await getAllBrewsPrisma(ownerId);
 
-			res.status(200).json(brews);
+			return res.status(200).json({ message: brews });
 		} else {
-			return res.status(403);
+			return res.status(401).json({ message: 'Not Authorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
