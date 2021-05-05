@@ -32,15 +32,15 @@ const addMethod = async (req: Request, res: Response) => {
 				favorite,
 				about
 			);
-			return res.status(201).json(newMethod);
+			return res.status(201).json({ message: 'Method Created', newMethod });
 		} else if (!ownerId) {
 			//$ If JWT doesn't control ownerId, user isn't auth'd
-			return res.status(401).json('User not Authorized');
+			return res.status(401).json({ message: 'Unauthorized' });
 		} else if (!name) {
 			//$ If Method Name isn't provided, cannot create method
-			return res.status(204).json('Method Not Provided');
+			return res.status(204).json({ message: 'Method Not Provided' });
 		} else {
-			return res.status(500);
+			return res.status(500).json({ message: 'Internal Error' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

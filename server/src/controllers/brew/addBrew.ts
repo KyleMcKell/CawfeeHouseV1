@@ -28,7 +28,7 @@ const addBrew = async (req: Request, res: Response) => {
 			);
 			return res.status(201).json({ message: 'Brew Created', newBrew });
 		} else if (!ownerId) {
-			return res.status(401).json({ message: 'User not Authorized' });
+			return res.status(401).json({ message: 'Unauthorized' });
 		} else if (!name) {
 			return res.status(204).json({ message: 'Brew Not Provided' });
 		} else {

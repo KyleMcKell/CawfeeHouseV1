@@ -10,9 +10,9 @@ const getAllMethods = async (res: Response) => {
 
 		if (ownerId) {
 			const methods = await getAllMethodsPrisma(ownerId);
-			return res.status(200).json({ methods });
+			return res.status(200).json({ message: methods });
 		} else {
-			return res.status(403);
+			return res.status(401).json({ message: 'Unathorized' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
