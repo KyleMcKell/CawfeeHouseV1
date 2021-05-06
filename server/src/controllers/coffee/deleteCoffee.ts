@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
-import { deleteCoffeePrisma, getCoffeePrisma } from '../../functions/coffee';
+import {
+	deleteCoffeePrisma,
+	getCoffeePrisma,
+} from '../../functions/prisma/coffee';
 import { deleteItem } from '../../functions/helper';
 
 const NAMESPACE = 'Coffee';

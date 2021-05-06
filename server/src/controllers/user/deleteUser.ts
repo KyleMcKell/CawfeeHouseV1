@@ -1,6 +1,6 @@
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
-import { deleteUserPrisma } from '../../functions/user';
+import { deleteUserPrisma } from '../../functions/prisma/user';
 import { isStringNumber } from '../../functions/utils';
 
 const NAMESPACE = 'User';

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import logging from '../../config/logging';
-import { getAllUsersPrisma } from '../../functions/user';
+import { getAllUsersPrisma } from '../../functions/prisma/user';
 
 const NAMESPACE = 'User';
 

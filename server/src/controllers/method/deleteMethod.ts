@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
-import { deleteMethodPrisma, getMethodPrisma } from '../../functions/method';
+import {
+	deleteMethodPrisma,
+	getMethodPrisma,
+} from '../../functions/prisma/method';
 import { deleteItem } from '../../functions/helper';
 
 const NAMESPACE = 'Method';
