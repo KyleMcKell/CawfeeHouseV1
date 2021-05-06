@@ -1,16 +1,17 @@
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
 import { isStringNumber } from '../../functions/utils';
-import { Coffee, Brew, User, Method } from '.prisma/client';
-
-type PrismaItems = Coffee | Brew | User | Method;
+import PrismaBaristaItems from '../../types/PrismaBaristaItems';
 
 const deleteItem = async (
 	req: Request,
 	res: Response,
 	NAMESPACE: string,
-	deleteItemPrisma: (id: number) => Promise<PrismaItems>,
-	getItemPrisma: (ownerId: number, id: number) => Promise<PrismaItems | null>
+	deleteItemPrisma: (id: number) => Promise<PrismaBaristaItems>,
+	getItemPrisma: (
+		ownerId: number,
+		id: number
+	) => Promise<PrismaBaristaItems | null>
 ) => {
 	try {
 		const ownerId: number = res.locals.jwt.id;
