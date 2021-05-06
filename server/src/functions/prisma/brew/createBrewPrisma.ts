@@ -4,9 +4,10 @@ const prisma = config.prisma;
 
 const createBrewPrisma = async (
 	ownerId: number,
+	name: string,
 	methodId: number,
 	coffeeId: number,
-	name: string,
+
 	flavorings: string | null,
 	favorite: boolean | null,
 	about: string | null
