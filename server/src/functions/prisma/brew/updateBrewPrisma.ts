@@ -4,9 +4,9 @@ const prisma = config.prisma;
 
 const updateBrewPrisma = async (
 	id: number,
-	name: string,
 	methodId: number,
 	coffeeId: number,
+	name: string,
 	flavorings: string | null,
 	favorite: boolean | null,
 	about: string | null
