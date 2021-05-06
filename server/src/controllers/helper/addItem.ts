@@ -1,4 +1,4 @@
-import { Brew } from '@prisma/client';
+import { Brew, Method } from '@prisma/client';
 import { Request, Response } from 'express';
 import logging from '../../config/logging';
 import PrismaBaristaItems from '../../types/PrismaBaristaItems';
@@ -19,7 +19,7 @@ const addItem = async (
 		const name: string = req.body;
 		let params: any[] = [];
 		switch (NAMESPACE) {
-			case 'Brew':
+			case 'Brew': {
 				const {
 					methodId,
 					coffeeId,
@@ -34,7 +34,30 @@ const addItem = async (
 						.json({ message: `Method or Coffee not Provided` });
 				}
 				break;
-			case 'Method':
+			}
+			case 'Method': {
+				const {
+					equipment,
+					ingredients,
+					brewTime,
+					temperature,
+					grindSize,
+					ratio,
+					favorite,
+					about,
+				} = req.body as Method;
+				params = [
+					equipment,
+					ingredients,
+					brewTime,
+					temperature,
+					grindSize,
+					ratio,
+					favorite,
+					about,
+				];
+				break;
+			}
 		}
 
 		if (name && ownerId) {
