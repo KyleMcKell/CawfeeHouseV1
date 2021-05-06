@@ -10,7 +10,10 @@ router.post('/add', extractJWT, controller.addMethod);
 //$ Gets all methods that belong to a user
 router.get('/', extractJWT, controller.getAllMethods);
 
-//$ Gets a method that belongs to the user
-router.get('/:id', extractJWT, controller.getMethod);
+//$ Deletes a method that belongs to the user
+router.delete('/:id', extractJWT, controller.deleteMethod);
+
+//$ Updates a method that belongs to the user
+router.patch('/:id', extractJWT, controller.updateMethod);
 
 export = router;

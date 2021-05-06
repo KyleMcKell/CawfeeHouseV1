@@ -4,8 +4,8 @@ import { updateItem } from '../helper';
 
 const NAMESPACE = 'Brew';
 
-const addBrew = async (req: Request, res: Response) => {
+const updateBrew = async (req: Request, res: Response) => {
 	await updateItem(req, res, NAMESPACE, updateBrewPrisma);
 };
 
-export default addBrew;
+export default updateBrew;
