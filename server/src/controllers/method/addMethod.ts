@@ -20,7 +20,7 @@ const addMethod = async (req: Request, res: Response) => {
 			about,
 		} = req.body as Method; //$ Request body mirrors Method prisma Model
 		if (name && ownerId) {
-			const newMethod = await createMethodPrisma(
+			const method = await createMethodPrisma(
 				ownerId,
 				name,
 				equipment,
@@ -32,7 +32,7 @@ const addMethod = async (req: Request, res: Response) => {
 				favorite,
 				about
 			);
-			res.status(201).json({ message: newMethod });
+			res.status(201).json({ message: method });
 		} else if (!ownerId) {
 			//$ If JWT doesn't control ownerId, user isn't auth'd
 			res.status(401).json({ message: 'Unauthorized' });

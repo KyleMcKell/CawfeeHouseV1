@@ -17,7 +17,7 @@ const addBrew = async (req: Request, res: Response) => {
 			about,
 		} = req.body as Brew;
 		if (name && ownerId) {
-			const newBrew = await createBrewPrisma(
+			const brew = await createBrewPrisma(
 				ownerId,
 				methodId,
 				coffeeId,
@@ -26,7 +26,7 @@ const addBrew = async (req: Request, res: Response) => {
 				favorite,
 				about
 			);
-			res.status(201).json({ message: 'Brew Created', newBrew });
+			res.status(201).json({ message: 'Brew Created', brew });
 		} else if (!ownerId) {
 			res.status(401).json({ message: 'Unauthorized' });
 		} else if (!name) {

@@ -10,7 +10,7 @@ const addCoffee = async (req: Request, res: Response) => {
 		const ownerId: number = res.locals.jwt.id; //$ res.locals.jwt set in middleware
 		const { name, brand, notes, roast, favorite, about } = req.body as Coffee; //$ Request body mirrors Coffee prisma Model
 		if (name && ownerId) {
-			const newCoffee = await createCoffeePrisma(
+			const coffee = await createCoffeePrisma(
 				ownerId,
 				name,
 				brand,
@@ -19,7 +19,7 @@ const addCoffee = async (req: Request, res: Response) => {
 				favorite,
 				about
 			);
-			res.status(201).json({ message: newCoffee });
+			res.status(201).json({ message: coffee });
 		} else if (!ownerId) {
 			//$ If owner doesn't exist, user wasn't authorized or isn't logged in, or session has expired
 			res.status(401).json({ message: 'Unauthorized' });
