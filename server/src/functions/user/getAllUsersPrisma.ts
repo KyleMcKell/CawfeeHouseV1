@@ -2,8 +2,8 @@ import config from '../../config/config';
 
 const prisma = config.prisma;
 
-const getAllUsersPrisma = () => {
-	const users = prisma.user.findMany();
+const getAllUsersPrisma = async () => {
+	const users = await prisma.user.findMany();
 
 	return users;
 };
