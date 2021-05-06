@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { isStringNumber } from '../../functions/utils';
 import PrismaBaristaItems from '../../types/PrismaBaristaItems';
 
-const deleteItem = async (
+const getItem = async (
 	req: Request,
 	res: Response,
 	NAMESPACE: string,
@@ -40,4 +40,4 @@ const deleteItem = async (
 	}
 };
 
-export default deleteItem;
+export default getItem;

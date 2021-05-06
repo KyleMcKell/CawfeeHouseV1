@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getAllBrewsPrisma } from '../../functions/brew';
-import getAllOfItem from '../../functions/helper/getAllOfItem';
+import { getAllOfItem } from '../../functions/helper';
 
 const NAMESPACE = 'Brew';
 
