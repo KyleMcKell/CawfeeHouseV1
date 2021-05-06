@@ -28,7 +28,6 @@ const createMethodPrisma = async (
 			about,
 		},
 	});
-
 	return newMethod;
 };
 
