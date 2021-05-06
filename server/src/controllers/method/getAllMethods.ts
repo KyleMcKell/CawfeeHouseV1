@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getAllMethodsPrisma } from '../../functions/prisma/method';
-import { getAllOfItem } from '../../functions/helper';
+import { getAllOfItem } from '../helper';
 
 const NAMESPACE = 'Method';
 

@@ -3,7 +3,7 @@ import {
 	deleteCoffeePrisma,
 	getCoffeePrisma,
 } from '../../functions/prisma/coffee';
-import { deleteItem } from '../../functions/helper';
+import { deleteItem } from '../helper';
 
 const NAMESPACE = 'Coffee';
 

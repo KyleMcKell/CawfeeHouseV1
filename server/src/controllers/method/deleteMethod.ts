@@ -3,7 +3,7 @@ import {
 	deleteMethodPrisma,
 	getMethodPrisma,
 } from '../../functions/prisma/method';
-import { deleteItem } from '../../functions/helper';
+import { deleteItem } from '../helper';
 
 const NAMESPACE = 'Method';
 

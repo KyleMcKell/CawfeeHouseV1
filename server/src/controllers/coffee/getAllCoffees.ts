@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getAllCoffeesPrisma } from '../../functions/prisma/coffee';
-import { getAllOfItem } from '../../functions/helper';
+import { getAllOfItem } from '../helper';
 
 const NAMESPACE = 'Coffee';
 

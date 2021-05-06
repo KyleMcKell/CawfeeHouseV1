@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { deleteBrewPrisma, getBrewPrisma } from '../../functions/prisma/brew';
-import { deleteItem } from '../../functions/helper';
+import { deleteItem } from '../helper';
 
 const NAMESPACE = 'Brew';
 
