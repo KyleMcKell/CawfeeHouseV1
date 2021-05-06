@@ -1,6 +1,7 @@
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
 import { getBrewPrisma } from '../../functions/brew';
+import { isStringNumber } from '../../functions/helper';
 
 const NAMESPACE = 'Brew';
 
@@ -12,7 +13,7 @@ const getBrew = async (req: Request, res: Response) => {
 
 		if (!ownerId) {
 			res.status(403).json({ message: 'Unauthorized' });
-		} else if (Number.isNaN(parseInt(id))) {
+		} else if (!isStringNumber(id)) {
 			res.status(400).json({ message: 'Invalid id provided' });
 		} else if (ownerId) {
 			const brew = await getBrewPrisma(ownerId, parseInt(id));

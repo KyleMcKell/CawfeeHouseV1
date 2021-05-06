@@ -1,6 +1,7 @@
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
 import { getMethodPrisma } from '../../functions/method';
+import { isStringNumber } from '../../functions/helper';
 
 const NAMESPACE = 'Method';
 
@@ -12,7 +13,7 @@ const getMethod = async (req: Request, res: Response) => {
 
 		if (!ownerId) {
 			res.status(403).json({ message: 'Unauthorized' });
-		} else if (Number.isNaN(parseInt(id))) {
+		} else if (!isStringNumber(id)) {
 			res.status(400).json({ message: 'Invalid id provided' });
 		} else if (ownerId) {
 			const method = await getMethodPrisma(ownerId, parseInt(id));
