@@ -1,4 +1,4 @@
-import UserLoginType from '../../types/user/UserLoginType';
+import UserLoginType from '../../types/UserLoginType';
 import { getUserPrisma } from '../../functions/prisma/user';
 import { signUserJWT } from '../../functions/utils';
 import { Request, Response } from 'express';
