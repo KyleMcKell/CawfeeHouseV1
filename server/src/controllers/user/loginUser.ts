@@ -1,5 +1,6 @@
 import UserLoginType from '../../types/user/UserLoginType';
-import { getUserPrisma, signUserJWT } from '../../functions/prisma/user';
+import { getUserPrisma } from '../../functions/prisma/user';
+import { signUserJWT } from '../../functions/utils';
 import { Request, Response } from 'express';
 import bcryptjs from 'bcryptjs';
 import logging from '../../config/logging';
