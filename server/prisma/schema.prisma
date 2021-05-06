@@ -19,6 +19,8 @@ model Brew {
   Coffee     Coffee   @relation(fields: [coffeeId], references: [id])
   Method     Method   @relation(fields: [methodId], references: [id])
   User       User     @relation(fields: [ownerId], references: [id])
+
+  @@index([name], name: "brewIndex")
 }
 
 model Coffee {
@@ -32,6 +34,8 @@ model Coffee {
   about    String?
   User     User     @relation(fields: [ownerId], references: [id])
   Brew     Brew[]
+
+  @@index([name], name: "coffeeIndex")
 }
 
 model Method {
@@ -48,6 +52,8 @@ model Method {
   about       String?
   User        User     @relation(fields: [ownerId], references: [id])
   Brew        Brew[]
+
+  @@index([name], name: "methodIndex")
 }
 
 model User {
@@ -59,4 +65,7 @@ model User {
   Brew     Brew[]
   Coffee   Coffee[]
   Method   Method[]
+
+  @@index([email], name: "emailIndex")
+  @@index([username], name: "usernameIndex")
 }
