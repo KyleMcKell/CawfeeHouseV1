@@ -1,7 +1,7 @@
 import logging from '../../config/logging';
 import { Request, Response } from 'express';
 import { getMethodPrisma } from '../../functions/method';
-import { isStringNumber } from '../../functions/helper';
+import { isStringNumber } from '../../functions/utils';
 
 const NAMESPACE = 'Method';
 
