@@ -10,15 +10,17 @@ const getBrew = async (req: Request, res: Response) => {
 
 		const { id } = req.params;
 
-		if (ownerId) {
+		if (ownerId && parseInt(id)) {
 			const brew = await getBrewPrisma(ownerId, parseInt(id));
 			if (!brew) {
 				res.status(404).json({ message: 'Brew not found' });
 			} else if (brew) {
 				res.status(200).json({ message: brew });
 			}
-		} else {
+		} else if (!ownerId) {
 			res.status(403).json({ message: 'Unauthorized' });
+		} else if (!id || parseInt(id) === NaN) {
+			res.status(400).json({ message: 'Invalid id provided' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);

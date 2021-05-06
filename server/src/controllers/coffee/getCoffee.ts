@@ -18,8 +18,10 @@ const getCoffee = async (req: Request, res: Response) => {
 			} else if (coffee) {
 				res.status(200).json({ message: coffee });
 			}
-		} else {
+		} else if (!ownerId) {
 			res.status(403).json({ message: 'Unauthorized' });
+		} else if (!id || parseInt(id) === NaN) {
+			res.status(400).json({ message: 'Invalid id provided' });
 		}
 	} catch (error) {
 		logging.error(NAMESPACE, error.message);
