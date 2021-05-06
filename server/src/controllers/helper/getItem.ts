@@ -17,11 +17,11 @@ const getItem = async (
 
 		const { id } = req.params;
 
-		const parsedId = parseInt(id);
-
 		if (!isStringNumber(id)) {
 			return res.status(400).json({ message: 'Invalid id provided' });
 		}
+
+		const parsedId = parseInt(id);
 
 		const item = await getItemPrisma(ownerId, parsedId);
 
