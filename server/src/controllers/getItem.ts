@@ -1,8 +1,5 @@
-import logging from '../../config/logging';
+import logging from '../config/logging';
 import { Request, Response } from 'express';
-import { getCoffeePrisma } from '../../functions/coffee';
-
-const NAMESPACE = 'Coffee';
 
 const getCoffee = async (req: Request, res: Response) => {
 	try {
