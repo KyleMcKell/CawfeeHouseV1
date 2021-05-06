@@ -7,7 +7,6 @@ const deleteItem = async (
 	req: Request,
 	res: Response,
 	NAMESPACE: string,
-	deleteItemPrisma: (id: number) => Promise<PrismaBaristaItems>,
 	getItemPrisma: (
 		ownerId: number,
 		id: number
@@ -24,11 +23,10 @@ const deleteItem = async (
 			return res.status(400).json({ message: 'Invalid id provided' });
 		}
 
-		const fetchedCoffee = await getItemPrisma(ownerId, parsedId);
+		const item = await getItemPrisma(ownerId, parsedId);
 
-		if (fetchedCoffee) {
-			const item = await deleteItemPrisma(parsedId);
-			res.status(200).json({ message: `${NAMESPACE} Deleted`, item });
+		if (item) {
+			res.status(200).json({ message: item });
 		} else {
 			res.status(404).json({ message: `${NAMESPACE} not found` });
 		}
