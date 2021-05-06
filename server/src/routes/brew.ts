@@ -14,6 +14,6 @@ router.get('/', extractJWT, controller.getAllBrews);
 router.get('/:id', extractJWT, controller.getBrew);
 
 //$ Deletes a brew that belongs to the user
-// router.get('/:id', extractJWT, controller.deleteBrew);
+router.delete('/:id', extractJWT, controller.deleteBrew);
 
 export = router;
