@@ -16,7 +16,7 @@ const addItem = async (
 	try {
 		const ownerId: number = res.locals.jwt.id;
 		const { name } = req.body;
-		let params: any[] = [];
+		let params: any[];
 		switch (NAMESPACE) {
 			case 'Brew': {
 				const {
@@ -62,6 +62,7 @@ const addItem = async (
 				params = [brand, notes, roast, favorite, about];
 				break;
 			default: {
+				params = [];
 				break;
 			}
 		}
