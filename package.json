@@ -10,7 +10,8 @@
 		"setup": "yarn && yarn server-install && yarn client-install",
 		"server": "yarn --cwd server start",
 		"client": "yarn --cwd client start",
-		"dev": "concurrently \"yarn server\" \"yarn client\""
+		"dev": "concurrently \"yarn server\" \"yarn client\"",
+		"start": "yarn server"
 	},
 	"dependencies": {
 		"concurrently": "^6.0.2"
