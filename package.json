@@ -7,12 +7,13 @@
 	"scripts": {
 		"client-install": "yarn --cwd client",
 		"server-install": "yarn --cwd server",
+		"server-build": "yarn build --cwd server",
 		"setup": "yarn && yarn server-install && yarn client-install",
 		"server": "yarn --cwd server start",
 		"client": "yarn --cwd client start",
 		"dev": "concurrently \"yarn server\" \"yarn client\"",
 		"start": "yarn server",
-		"heroku-prebuild": "yarn server-install"
+		"heroku-prebuild": "yarn server-install && yarn server-build"
 	},
 	"dependencies": {
 		"concurrently": "^6.0.2"
