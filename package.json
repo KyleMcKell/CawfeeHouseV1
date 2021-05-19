@@ -9,10 +9,10 @@
 		"server-install": "yarn --cwd server",
 		"server-build": "yarn --cwd server build ",
 		"setup": "yarn && yarn server-install && yarn client-install",
-		"server": "yarn --cwd server dev",
-		"client": "yarn --cwd client start",
-		"dev": "concurrently \"yarn server\" \"yarn client\"",
-		"start": "yarn server",
+		"client-dev": "yarn --cwd client start",
+		"server-dev": "yarn --cwd server dev",
+		"dev": "concurrently \"yarn server-dev\" \"yarn client-dev\"",
+		"start": "yarn --cwd server start",
 		"heroku-prebuild": "yarn server-install && yarn server-build"
 	},
 	"dependencies": {
