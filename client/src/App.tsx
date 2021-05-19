@@ -5,13 +5,15 @@ import Register from './components/Register';
 
 function App() {
 	return (
-		<h1>Hi there</h1>
-		// <Router>
-		// 	<Switch>
-		// 		<Route path="/login" component={Login} />
-		// 		<Route path="/register" component={Register} />
-		// 	</Switch>
-		// </Router>
+		<>
+			<h1>Hi there</h1>
+			<Router>
+				<Switch>
+					<Route path="/login" component={Login} />
+					<Route path="/register" component={Register} />
+				</Switch>
+			</Router>
+		</>
 	);
 }
 
