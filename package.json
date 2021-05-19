@@ -9,7 +9,7 @@
 		"server-install": "yarn --cwd server",
 		"server-build": "yarn --cwd server build ",
 		"setup": "yarn && yarn server-install && yarn client-install",
-		"server": "yarn --cwd server start",
+		"server": "yarn --cwd server dev",
 		"client": "yarn --cwd client start",
 		"dev": "concurrently \"yarn server\" \"yarn client\"",
 		"start": "yarn server",
