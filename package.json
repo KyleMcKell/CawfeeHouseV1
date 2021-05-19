@@ -7,7 +7,7 @@
 	"scripts": {
 		"client-install": "yarn --cwd client",
 		"server-install": "yarn --cwd server",
-		"server-build": "yarn build --cwd server",
+		"server-build": "yarn --cwd server build ",
 		"setup": "yarn && yarn server-install && yarn client-install",
 		"server": "yarn --cwd server start",
 		"client": "yarn --cwd client start",
