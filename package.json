@@ -11,7 +11,8 @@
 		"server": "yarn --cwd server start",
 		"client": "yarn --cwd client start",
 		"dev": "concurrently \"yarn server\" \"yarn client\"",
-		"start": "yarn server"
+		"start": "yarn server",
+		"heroku-prebuild": "yarn server-install"
 	},
 	"dependencies": {
 		"concurrently": "^6.0.2"
