@@ -16,7 +16,6 @@
 		"heroku-prebuild": "yarn server-install && yarn server-build"
 	},
 	"dependencies": {
-		"concurrently": "^6.0.2",
-		"prettier": "^2.3.0"
+		"concurrently": "^6.0.2"
 	}
 }

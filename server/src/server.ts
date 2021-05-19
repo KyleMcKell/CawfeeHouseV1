@@ -55,6 +55,9 @@ app.use('/user', userRoutes); //? User Route, contains Login, Register, Get All,
 app.use('/coffee', coffeeRoutes); //? Coffee Route, contains Add, Get User's Coffees
 app.use('/method', methodRoutes); //? Method Route, contains Add, Get User's Methods
 app.use('/brew', brewRoutes); //? Brew Route, contains Add, Get User's Brews
+app.get('/hi', (req, res) => {
+	res.sendStatus(200);
+});
 
 //$ Error Handling
 app.use((req, res) => {
