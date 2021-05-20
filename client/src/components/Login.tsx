@@ -5,7 +5,7 @@ import {
 	Input,
 	InputLabel,
 } from '@material-ui/core';
-import axios from 'axios';
+import axios from '../axios';
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 
 interface Props {}
@@ -27,12 +27,8 @@ const Login = (props: Props) => {
 		try {
 			if (userId && password) {
 				const body = { userId, password };
-				const login = await axios.post(
-					'http://localhost:8080/user/login',
-					body
-				);
+				const login = await axios.post('/user/login', body);
 				setPassword('');
-				console.log(login.data);
 			}
 		} catch (error) {}
 	};
