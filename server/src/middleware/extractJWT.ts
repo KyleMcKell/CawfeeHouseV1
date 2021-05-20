@@ -12,7 +12,7 @@ const extractJWT = (req: Request, res: Response, next: NextFunction) => {
 	let token = req.headers.authorization?.split(' ')[1];
 
 	if (token) {
-		jwt.verify(token, config.server.token.secret, (error, decoded) => {
+		jwt.verify(token, config.server.token.access, (error, decoded) => {
 			if (error) {
 				return res.status(404).json({
 					message: error.message,
