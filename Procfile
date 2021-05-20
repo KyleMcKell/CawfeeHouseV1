@@ -1,3 +1,3 @@
 web: npm start
 
-release: npx --cwd server prisma migrate deploy
+release: cd server && npx server prisma migrate deploy && cd ..
