@@ -26,7 +26,7 @@ const signUserJWT = (
 				id: user.id,
 				isAdmin: user.admin,
 			},
-			config.server.token.secret,
+			config.server.token.access,
 			{
 				issuer: config.server.token.issuer,
 				algorithm: 'HS256',
