@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header(
 		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept, Authroization'
+		'Origin, X-Requested-With, Content-Type, Accept, Authorization'
 	);
 
 	if (req.method == 'OPTIONS') {
@@ -56,6 +56,7 @@ app.use('/coffee', coffeeRoutes); //? Coffee Route, contains Add, Get User's Cof
 app.use('/method', methodRoutes); //? Method Route, contains Add, Get User's Methods
 app.use('/brew', brewRoutes); //? Brew Route, contains Add, Get User's Brews
 app.get('/hi', (req, res) => {
+	console.log('hi started');
 	res.sendStatus(200);
 });
 
