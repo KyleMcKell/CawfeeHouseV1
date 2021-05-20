@@ -19,7 +19,7 @@ const SERVER = {
 	token: {
 		expireTime: SERVER_TOKEN_EXPIRETIME,
 		issuer: SERVER_TOKEN_ISSUER,
-		secret: SERVER_TOKEN_SECRET,
+		access: SERVER_TOKEN_SECRET,
 	},
 };
 
