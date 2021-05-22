@@ -50,3 +50,34 @@ Get a brew from its id, passed from req.params
 **_DELETE_**: /brew/:id
 
 Requires JWT
+
+Deletes a brew from its id, passed from req.params
+
+## Update a brew from Id
+
+**_PATCH_**: /brew/:id
+
+Requires JWT
+
+Updates a brew from its id, passed from req.params
+
+Request body must contain:
+{
+methodId: number,
+coffeeId: number,
+name: string,
+flavorings: string | null,
+favorite: boolean | null,
+about: string | null
+}
+
+Sends JSON to Database containing:
+{
+ownerId,
+methodId,
+coffeeId,
+name,
+flavorings,
+favorite,
+about,
+}

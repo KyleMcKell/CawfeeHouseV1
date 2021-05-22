@@ -30,16 +30,14 @@ password: string
 
 **_GET_**: /user
 
-Gets all users from database
+Requires JWT and user to be an admin
 
-Protected route
+Gets all users from database
 
 ## Validate User
 
 **_GET_**: /user/validate
 
-Validates user via a middleware to see if they can perform an action
+Requires JWT
 
-Protected Route
-
-Requires Bearer Token
+Test Route to check to see if JWT is valid
