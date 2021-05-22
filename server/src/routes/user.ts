@@ -4,7 +4,7 @@ import extractJWT from '../middleware/extractJWT';
 
 const router = express.Router();
 
-//$ Protected route to validate a user when performing an action
+//$ Test route to see if JWT works
 router.get('/validate', extractJWT, controller.validateUserToken);
 
 //$ Registers a user, request body contains JSON {username, email, password}
@@ -15,6 +15,6 @@ router.post('/register', controller.registerUser);
 router.post('/login', controller.loginUser);
 
 //$ Protected route to get all users
-router.get('/', controller.getAllUsers);
+router.get('/', extractJWT, controller.getAllUsers);
 
 export = router;

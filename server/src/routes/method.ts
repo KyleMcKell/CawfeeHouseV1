@@ -5,10 +5,13 @@ import extractJWT from '../middleware/extractJWT';
 const router = express.Router();
 
 //$ Adds a method to the database
-router.post('/add', extractJWT, controller.addMethod);
+router.post('/', extractJWT, controller.addMethod);
 
 //$ Gets all methods that belong to a user
 router.get('/', extractJWT, controller.getAllMethods);
+
+//$ Gets a methods that belongs to the user
+router.get('/:id', extractJWT, controller.getMethod);
 
 //$ Deletes a method that belongs to the user
 router.delete('/:id', extractJWT, controller.deleteMethod);
