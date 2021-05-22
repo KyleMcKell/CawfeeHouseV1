@@ -43,16 +43,16 @@ const Register = (props: Props) => {
 			<Grid item>
 				<form onSubmit={handleSubmit}>
 					<FormControl>
-						<InputLabel htmlFor="userId">Username</InputLabel>
+						<InputLabel htmlFor="username">Username</InputLabel>
 						<Input
-							id="userId"
+							id="username"
 							value={username}
 							onChange={handleUsernameChange}
 						/>
 					</FormControl>
 					<FormControl>
-						<InputLabel htmlFor="userId">Email</InputLabel>
-						<Input id="userId" value={email} onChange={handleEmailChange} />
+						<InputLabel htmlFor="email">Email</InputLabel>
+						<Input id="email" value={email} onChange={handleEmailChange} />
 					</FormControl>
 					<FormControl>
 						<InputLabel htmlFor="password">Password</InputLabel>
