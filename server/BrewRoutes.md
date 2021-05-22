@@ -4,9 +4,9 @@
 
 **_POST_**: /brew/add
 
-Adds a brew to the database.
-
 Requires JWT
+
+Adds a brew to the database.
 
 Request body must contain:
 {
@@ -31,7 +31,7 @@ about,
 
 ## Get all brews for a user
 
-**_GET_**: /brew
+**_GET_**: /brew/get
 
 Requires JWT
 
@@ -39,12 +39,14 @@ Get all brews that belong to a user
 
 ## Get brew from Id
 
-**_GET_**: /brew/:id
+**_GET_**: /brew/get/:id
 
 Requires JWT
 
-Get a brew from its id, passed as req.params
+Get a brew from its id, passed from req.params
 
 ## Delete brew from Id
 
 **_DELETE_**: /brew/:id
+
+Requires JWT

@@ -28,7 +28,7 @@ password: string
 
 ## Get all Users
 
-**_GET_**: /user/get
+**_GET_**: /user
 
 Gets all users from database
 
