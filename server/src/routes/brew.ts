@@ -8,15 +8,15 @@ const router = express.Router();
 router.post('/add', extractJWT, controller.addBrew);
 
 //$ Gets all brews that belong to a user
-router.get('/', extractJWT, controller.getAllBrews);
+router.get('/get', extractJWT, controller.getAllBrews);
 
 //$ Gets a brew that belongs to the user
-router.get('/:id', extractJWT, controller.getBrew);
+router.get('/get/:id', extractJWT, controller.getBrew);
 
 //$ Deletes a brew that belongs to the user
-router.delete('/:id', extractJWT, controller.deleteBrew);
+router.delete('/delete/:id', extractJWT, controller.deleteBrew);
 
 //$ Updates a brew that belongs to the user
-router.patch('/:id', extractJWT, controller.updateBrew);
+router.patch('/update/:id', extractJWT, controller.updateBrew);
 
 export = router;

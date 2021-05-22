@@ -6,6 +6,8 @@
 
 Adds a brew to the database.
 
+Requires JWT
+
 Request body must contain:
 {
 methodId: number,
@@ -27,9 +29,11 @@ favorite,
 about,
 }
 
-## Get all brews
+## Get all brews for a user
 
 **_GET_**: /brew
+
+Requires JWT
 
 Get all brews that belong to a user
 
@@ -37,4 +41,10 @@ Get all brews that belong to a user
 
 **_GET_**: /brew/:id
 
+Requires JWT
+
 Get a brew from its id, passed as req.params
+
+## Delete brew from Id
+
+**_DELETE_**: /brew/:id
