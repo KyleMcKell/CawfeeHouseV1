@@ -2,7 +2,7 @@
 
 ## Add a Brew
 
-**_POST_**: /brew/add
+**_POST_**: /brew
 
 Requires JWT
 
@@ -31,7 +31,7 @@ about,
 
 ## Get all brews for a user
 
-**_GET_**: /brew/get
+**_GET_**: /brew
 
 Requires JWT
 
@@ -39,7 +39,7 @@ Get all brews that belong to a user
 
 ## Get brew from Id
 
-**_GET_**: /brew/get/:id
+**_GET_**: /brew/:id
 
 Requires JWT
 

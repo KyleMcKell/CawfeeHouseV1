@@ -4,7 +4,7 @@ import extractJWT from '../middleware/extractJWT';
 
 const router = express.Router();
 
-//$ Protected route to validate a user when performing an action
+//$ Test route to see if JWT works
 router.get('/validate', extractJWT, controller.validateUserToken);
 
 //$ Registers a user, request body contains JSON {username, email, password}
