@@ -10,11 +10,12 @@ const createUser = async (hash: string, username: string, email: string) => {
 				username,
 				email,
 				password: hash,
-				admin: false, //? Default admin to false
+				admin: false, //? Default admin to false, adding functionality to change admin permissions later
 			},
 		});
 		return newUser;
 	} catch (error) {
+		//$ returns undefined which is handled as a user already exists in database in controller
 		return;
 	}
 };
