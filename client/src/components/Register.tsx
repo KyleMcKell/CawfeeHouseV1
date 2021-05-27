@@ -6,7 +6,7 @@ import {
 	InputLabel,
 } from '@material-ui/core';
 import axios from '../axios';
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 
 interface Props {}
 

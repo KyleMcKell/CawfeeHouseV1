@@ -6,11 +6,14 @@ import {
 	InputLabel,
 } from '@material-ui/core';
 import axios from '../axios';
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import User from '../utils/User';
 
-interface Props {}
+interface Props {
+	setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+}
 
-const Login = (props: Props) => {
+const Login = ({ setUser }: Props) => {
 	const [userId, setUserId] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -28,6 +31,11 @@ const Login = (props: Props) => {
 			if (userId && password) {
 				const body = { userId, password };
 				const login = await axios.post('/user/login', body);
+				if (login) {
+					localStorage.setItem('token', login.data.token);
+					setUser({ userId });
+					console.log('worked');
+				}
 				setPassword('');
 			}
 		} catch (error) {}
