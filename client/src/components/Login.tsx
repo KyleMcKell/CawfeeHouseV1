@@ -34,7 +34,6 @@ const Login = ({ setUser }: Props) => {
 				if (login) {
 					localStorage.setItem('token', login.data.token);
 					setUser({ userId });
-					console.log('worked');
 				}
 				setPassword('');
 			}
