@@ -14,11 +14,13 @@ const loginUser = async (req: Request, res: Response) => {
 	try {
 		const user = await getUserPrisma(userId);
 		if (!user) {
+			logging.info(NAMESPACE, 'User not found');
 			return res.status(404).json({ message: `User "${userId}" not found` });
 		}
 		//$ Compare password with bcrypt hash
 		bcryptjs.compare(password, user.password, (error, result) => {
 			if (error) {
+				logging.error(NAMESPACE, 'Password Mismatch', error);
 				res.status(401).json({
 					message: 'Password Mismatch',
 				});
@@ -26,11 +28,13 @@ const loginUser = async (req: Request, res: Response) => {
 				//$ Sign a JWT to user if password matches
 				signUserJWT(user, (error, token) => {
 					if (error) {
+						logging.error(NAMESPACE, 'Unable to Sign JWT', error);
 						res.status(401).json({
 							message: 'Unable to Sign JWT',
 							error,
 						});
 					} else if (token) {
+						logging.info(NAMESPACE, 'Auth Successful');
 						res.status(200).json({
 							message: 'Auth Successful',
 							token,
