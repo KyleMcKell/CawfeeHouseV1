@@ -24,17 +24,22 @@ const loginUser = async (req: Request, res: Response) => {
 			signUserJWT(user, (error, token) => {
 				if (error) {
 					logging.error(NAMESPACE, 'Unable to Sign JWT', error);
-					res.status(401).json({
+					return res.status(401).json({
 						message: 'Unable to Sign JWT',
 						error,
 					});
 				} else if (token) {
 					logging.info(NAMESPACE, 'Auth Successful');
-					res.status(200).json({
+					return res.status(200).json({
 						message: 'Auth Successful',
 						token,
 					});
 				}
+			});
+		} else {
+			logging.info(NAMESPACE, 'Password Mismatch, Auth Unsuccessful');
+			return res.status(401).json({
+				message: 'Password Mismatch',
 			});
 		}
 	} catch (error) {
